@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider_architecture/ui/widgets/triangle.dart';
 
+//classe de déppart avant de lancer l'activitée
 class StartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

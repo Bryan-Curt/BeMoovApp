@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AviitamConnexion extends StatelessWidget {
+  //gestion de la future connexion a aviitam
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

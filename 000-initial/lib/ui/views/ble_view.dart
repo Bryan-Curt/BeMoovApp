@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BleConnexion extends StatelessWidget {
+  // Gestion de la future connexion bluetooth
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
+//Première vue de l'application, correspond à la première page, une page servant d'affichage, de temporisation avant de rediriger vers les connexions ble et aviitam
+
 class FirstView extends StatelessWidget {
+  //Classe composée de widgets
   @override
   Widget build(BuildContext context) {
+    //construction des widgets
     Widget imagesection = Container(
+      // premier widget gérant l'image
       padding: const EdgeInsets.only(top: 60),
       child: Image.asset(
         'images/logoaccueil.jpg',
@@ -12,6 +17,7 @@ class FirstView extends StatelessWidget {
     );
 
     Widget titlesection = Container(
+      //deuxième widget gérant le titre (BEMOOV)
       padding: const EdgeInsets.only(top: 60, bottom: 90),
       child: Text(
         'BEMOOV',
@@ -25,6 +31,7 @@ class FirstView extends StatelessWidget {
     );
 
     Widget buttonsection = Container(
+      //troisième widget gérant le bouton de connexion
       padding: EdgeInsets.symmetric(horizontal: 70),
       child: FlatButton(
         onPressed: () async {
@@ -39,15 +46,17 @@ class FirstView extends StatelessWidget {
             borderRadius: BorderRadius.circular(25)),
       ),
     );
+
     return MaterialApp(
-      title: 'Flutter layout demo',
+      //Ce qui est renvoyé à l'écran
+      title: 'BeMoov',
       home: Scaffold(
         body: ListView(
           padding: EdgeInsets.symmetric(vertical: 20),
           children: [
-            imagesection,
-            titlesection,
-            buttonsection,
+            imagesection, //appel de l'image
+            titlesection, // appel du titre
+            buttonsection, // appel du bouton
           ],
         ),
       ),

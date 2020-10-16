@@ -11,6 +11,7 @@ void main() {
   runApp(MyApp());
 }
 
+//Main de l'application, sert à lancer l'application sur la première page (first_view) et bien définir la route
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       create: (BuildContext context) =>
           locator<AuthenticationService>().userController.stream,
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'BeMoov',
         theme: ThemeData(),
         initialRoute: 'firstPage',
         onGenerateRoute: Router.generateRoute,

@@ -5,6 +5,7 @@ import 'package:provider_architecture/ui/views/ble_view.dart';
 import 'package:provider_architecture/ui/views/aviitam_view.dart';
 import 'package:provider_architecture/ui/views/start_view.dart';
 
+// Page qui définit dynamiquement toutes les routes, permet de gérer les liens des boutons notemment.
 const String initialRoute = "firstPage";
 
 class Router {
