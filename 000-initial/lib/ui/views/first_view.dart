@@ -24,7 +24,7 @@ class FirstView extends StatelessWidget {
     );
 
     Widget titlesection = Container(
-      padding: const EdgeInsets.only(top: 60),
+      padding: const EdgeInsets.only(top: 60, bottom: 90),
       child: Text(
         'BEMOOV',
         style: TextStyle(
@@ -37,36 +37,25 @@ class FirstView extends StatelessWidget {
     );
 
     Widget buttonsection = Container(
-      padding: const EdgeInsets.all(100),
-      child: Container(
-        //width: 10,
-        //padding: EdgeInsets.symmetric(horizontal: 150, vertical: 30),
-        decoration: BoxDecoration(
-            border: Border.all(width: 2.0, color: Colors.red),
-            borderRadius: BorderRadius.circular(10)),
-        child: Row(
-          children: <Widget>[
-            Container(
-              height: 50,
-              width: 60,
-            ),
-            Text(
-              "CONNEXION",
-              style: TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+      padding: EdgeInsets.symmetric(horizontal: 70),
+      child: FlatButton(
+        onPressed: () async {
+          Navigator.pushNamed(context, 'bleConnexionPage');
+        },
+        child: Text('CONNEXION', style: TextStyle(color: Colors.red)),
+        textColor: Colors.red,
+        padding: EdgeInsets.all(20),
+        shape: RoundedRectangleBorder(
+            side: BorderSide(
+                color: Colors.red, width: 1, style: BorderStyle.solid),
+            borderRadius: BorderRadius.circular(25)),
       ),
     );
-
     return MaterialApp(
       title: 'Flutter layout demo',
       home: Scaffold(
         body: ListView(
+          padding: EdgeInsets.symmetric(vertical: 20),
           children: [
             imagesection,
             titlesection,
