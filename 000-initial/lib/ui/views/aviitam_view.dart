@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BleConnexion extends StatelessWidget {
+class AviitamConnexion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -10,14 +10,13 @@ class BleConnexion extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 700),
           children: [
             Text(
-              "BLE pas encore implémenté",
+              "connexion aviitam pas encore implémentée",
             ),
             FlatButton(
               onPressed: () async {
-                Navigator.pushNamed(context, 'aviitamConnexionPage');
+                Navigator.pushNamed(context, 'startPage');
               },
-              child: Text('CONNEXION AVIITAM',
-                  style: TextStyle(color: Colors.red)),
+              child: Text('ECRAN DEPART', style: TextStyle(color: Colors.red)),
               textColor: Colors.red,
               padding: EdgeInsets.all(20),
               shape: RoundedRectangleBorder(
