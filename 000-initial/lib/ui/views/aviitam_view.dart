@@ -8,6 +8,7 @@ class AviitamConnexion extends StatelessWidget {
       title: 'Flutter layout demo',
       home: Scaffold(
         body: ListView(
+          physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.symmetric(vertical: 700),
           children: [
             Text(

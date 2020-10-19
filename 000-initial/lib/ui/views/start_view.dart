@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_architecture/core/models/appMode.dart';
+import 'package:provider_architecture/core/models/user.dart';
 
 //classe de déppart avant de lancer l'activitée
 class StartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final mode = Provider.of<User>(context);
+    var colorSimpleButton;
+    var colorSportifButton;
+    if (mode.modeIsSimple) {
+      colorSimpleButton = Colors.orange;
+      colorSportifButton = Colors.grey;
+    } else {
+      colorSimpleButton = Colors.grey;
+      colorSportifButton = Colors.orange;
+    }
+
     Widget menusection = Container(
       padding: const EdgeInsets.only(top: 20, right: 0, left: 325),
       child: RawMaterialButton(
@@ -23,7 +37,7 @@ class StartView extends StatelessWidget {
     Widget imagesection = Container(
       padding: const EdgeInsets.only(top: 10),
       child: Image.asset(
-        'images/logoaccueil.jpg',
+        'images/logoaccueil1.png',
         //fit: BoxFit.cover,
         alignment: Alignment.center,
         height: 225,
@@ -61,14 +75,17 @@ class StartView extends StatelessWidget {
       padding: EdgeInsets.only(top: 40, left: 70, right: 70),
       child: FlatButton(
         onPressed: () async {
-          Navigator.pushNamed(context, 'bleConnexionPage');
+          Navigator.pushNamed(context, 'startPage');
+          mode.modeIsSimple = true;
         },
-        child: Text('MODE SIMPLE', style: TextStyle(color: Colors.grey)),
-        textColor: Colors.grey,
+        child: Text(
+          "MODE SIMPLE",
+          style: TextStyle(color: colorSimpleButton),
+        ),
         padding: EdgeInsets.all(20),
         shape: RoundedRectangleBorder(
             side: BorderSide(
-                color: Colors.grey, width: 2, style: BorderStyle.solid),
+                color: colorSimpleButton, width: 2, style: BorderStyle.solid),
             borderRadius: BorderRadius.circular(20)),
       ),
     );
@@ -77,23 +94,25 @@ class StartView extends StatelessWidget {
       padding: EdgeInsets.only(top: 20, left: 70, right: 70),
       child: FlatButton(
         onPressed: () async {
-          Navigator.pushNamed(context, 'bleConnexionPage');
+          Navigator.pushNamed(context, 'startPage');
+          mode.modeIsSimple = false;
         },
-        child: Text('MODE SPORTIF', style: TextStyle(color: Colors.orange)),
-        textColor: Colors.orange,
+        child:
+            Text('MODE SPORTIF', style: TextStyle(color: colorSportifButton)),
         padding: EdgeInsets.all(20),
         shape: RoundedRectangleBorder(
             side: BorderSide(
-                color: Colors.orange, width: 2, style: BorderStyle.solid),
+                color: colorSportifButton, width: 2, style: BorderStyle.solid),
             borderRadius: BorderRadius.circular(20)),
       ),
     );
 
-    return MaterialApp(
-      title: 'Flutter layout demo',
-      home: Scaffold(
+    return Provider<MyMode>(
+      create: (context) => MyMode(),
+      child: Scaffold(
         body: ListView(
           padding: EdgeInsets.symmetric(vertical: 20),
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             menusection,
             imagesection,

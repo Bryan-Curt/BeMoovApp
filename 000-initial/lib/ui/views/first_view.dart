@@ -11,7 +11,7 @@ class FirstView extends StatelessWidget {
       // premier widget gérant l'image
       padding: const EdgeInsets.only(top: 60),
       child: Image.asset(
-        'images/logoaccueil.jpg',
+        'images/logoaccueil1.png',
         fit: BoxFit.cover,
       ),
     );
@@ -53,6 +53,7 @@ class FirstView extends StatelessWidget {
       home: Scaffold(
         body: ListView(
           padding: EdgeInsets.symmetric(vertical: 20),
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             imagesection, //appel de l'image
             titlesection, // appel du titre

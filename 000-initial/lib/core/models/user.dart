@@ -22,4 +22,12 @@ class User {
     data['username'] = this.username;
     return data;
   }
+
+  bool _modeIsSimple = true;
+  bool get modeIsSimple => _modeIsSimple;
+
+  set modeIsSimple(bool newValue) {
+    _modeIsSimple = newValue;
+    //notifyListeners();
+  }
 }
