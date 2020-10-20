@@ -125,7 +125,7 @@ class StartView extends StatelessWidget {
       padding: EdgeInsets.only(top: 40, left: 70, right: 70),
       child: FlatButton(
         onPressed: () async {
-          Navigator.pushNamed(context, 'startPage');
+          Navigator.pushNamed(context, 'simple');
           mode.modeIsSimple = true;
         },
         child: Text(
