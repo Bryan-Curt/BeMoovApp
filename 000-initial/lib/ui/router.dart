@@ -5,6 +5,7 @@ import 'package:provider_architecture/ui/views/ble_view.dart';
 import 'package:provider_architecture/ui/views/aviitam_view.dart';
 import 'package:provider_architecture/ui/views/simple_view.dart';
 import 'package:provider_architecture/ui/views/start_view.dart';
+import 'package:provider_architecture/ui/views/sportif_view.dart';
 
 // Page qui définit dynamiquement toutes les routes, permet de gérer les liens des boutons notemment.
 const String initialRoute = "firstPage";
@@ -22,6 +23,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => InitStartView());
       case 'simple':
         return MaterialPageRoute(builder: (_) => InitSimpleMonitoring());
+      case 'sportif':
+        return MaterialPageRoute(builder: (_) => InitSportifMonitoring());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

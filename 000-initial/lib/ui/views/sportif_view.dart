@@ -5,12 +5,12 @@ import 'package:provider/provider.dart';
 import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/user.dart';
 
-class InitSimpleMonitoring extends StatefulWidget {
+class InitSportifMonitoring extends StatefulWidget {
   @override
-  SimpleMonitoring createState() => SimpleMonitoring();
+  SportifMonitoring createState() => SportifMonitoring();
 }
 
-class SimpleMonitoring extends State<InitSimpleMonitoring> {
+class SportifMonitoring extends State<InitSportifMonitoring> {
   bool flag = true;
   Stream<int> timerStream;
   StreamSubscription<int> timerSubscription;
@@ -93,36 +93,6 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
       ),
     );
 
-    Widget circularprogressbarsection = SizedBox(
-      height: 250.0,
-      child: Stack(
-        children: <Widget>[
-          Center(
-            child: Container(
-              width: 250,
-              height: 250,
-              child: new CircularProgressIndicator(
-                strokeWidth: 15,
-                value: (double.parse(secondsStr) % 60) / 60,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                backgroundColor: Colors.grey,
-              ),
-            ),
-          ),
-          Center(
-              child: Text(
-            (((double.parse(secondsStr) % 60) / 60) * 100)
-                    .truncate()
-                    .toString() +
-                " %",
-            style: TextStyle(
-              fontSize: 50.0,
-            ),
-          )),
-        ],
-      ),
-    );
-
     Widget pausebutton = Container(
       padding: EdgeInsets.symmetric(horizontal: 70, vertical: 50),
       child: FlatButton(
@@ -146,7 +116,10 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
         body: ListView(
           padding: EdgeInsets.symmetric(vertical: 20),
           physics: const NeverScrollableScrollPhysics(),
-          children: [stopwatchsection, circularprogressbarsection],
+          children: [
+            stopwatchsection,
+            //circularprogressbarsection,
+          ],
         ),
         bottomNavigationBar: pausebutton,
       ),

@@ -169,7 +169,7 @@ class StartView extends State<InitStartView> {
             if (mode.modeIsSimple) {
               Navigator.pushNamed(context, 'simple');
             } else {
-              Navigator.pushNamed(context, 'startPage');
+              Navigator.pushNamed(context, 'sportif');
             }
           },
           elevation: 2.0,

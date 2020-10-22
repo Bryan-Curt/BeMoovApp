@@ -32,7 +32,7 @@ class FirstView extends StatelessWidget {
 
     Widget buttonsection = Container(
       //troisième widget gérant le bouton de connexion
-      padding: EdgeInsets.symmetric(horizontal: 70),
+      padding: EdgeInsets.symmetric(horizontal: 70, vertical: 50),
       child: FlatButton(
         onPressed: () async {
           Navigator.pushNamed(context, 'bleConnexionPage');
@@ -57,9 +57,9 @@ class FirstView extends StatelessWidget {
           children: [
             imagesection, //appel de l'image
             titlesection, // appel du titre
-            buttonsection, // appel du bouton
           ],
         ),
+        bottomNavigationBar: buttonsection, // appel du bouton
       ),
     );
   }
