@@ -74,37 +74,64 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
       initStopWatch();
     }
 
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "$hoursStr:$minutesStr:$secondsStr",
+    Widget stopwatchsection = Container(
+      padding: EdgeInsets.only(top: 50),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("TEMPS",
               style: TextStyle(
-                fontSize: 50.0,
+                fontSize: 20.0,
+              )),
+          Text(
+            "$hoursStr:$minutesStr:$secondsStr",
+            style: TextStyle(
+              fontSize: 70.0,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    Widget circularprogressbarsection = SizedBox(
+      height: 250.0,
+      child: Stack(
+        children: <Widget>[
+          Center(
+            child: Container(
+              width: 250,
+              height: 250,
+              child: new CircularProgressIndicator(
+                strokeWidth: 15,
+                value: (double.parse(secondsStr) % 60) / 60,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                backgroundColor: Colors.grey,
               ),
             ),
-            SizedBox(
-              height: 250.0,
-              child: Stack(
-                children: <Widget>[
-                  Center(
-                    child: Container(
-                      width: 250,
-                      height: 250,
-                      child: new CircularProgressIndicator(
-                        strokeWidth: 15,
-                        value: (double.parse(secondsStr) % 60) / 60,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                        backgroundColor: Colors.grey,
-                      ),
-                    ),
-                  ),
-                  Center(child: Text("Test")),
-                ],
-              ),
+          ),
+          Center(
+              child: Text(
+            (((double.parse(secondsStr) % 60) / 60) * 100)
+                    .truncate()
+                    .toString() +
+                " %",
+            style: TextStyle(
+              fontSize: 50.0,
             ),
+          )),
+        ],
+      ),
+    );
+
+    return Provider<MyMode>(
+      create: (context) => MyMode(),
+      child: Scaffold(
+        body: ListView(
+          padding: EdgeInsets.symmetric(vertical: 20),
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            stopwatchsection,
+            circularprogressbarsection,
           ],
         ),
       ),
