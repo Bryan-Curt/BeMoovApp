@@ -55,8 +55,25 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
     return streamController.stream;
   }
 
+  void initStopWatch() {
+    timerStream = stopWatchStream();
+    timerSubscription = timerStream.listen((int newTick) {
+      if (mounted)
+        setState(() {
+          hoursStr =
+              ((newTick / (60 * 60)) % 60).floor().toString().padLeft(2, '0');
+          minutesStr = ((newTick / 60) % 60).floor().toString().padLeft(2, '0');
+          secondsStr = (newTick % 60).floor().toString().padLeft(2, '0');
+        });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (secondsStr == '00' && minutesStr == '00') {
+      initStopWatch();
+    }
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -68,86 +85,26 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
                 fontSize: 50.0,
               ),
             ),
-            SizedBox(height: 30.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RaisedButton(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                  onPressed: () {
-                    timerStream = stopWatchStream();
-                    timerSubscription = timerStream.listen((int newTick) {
-                      setState(() {
-                        hoursStr = ((newTick / (60 * 60)) % 60)
-                            .floor()
-                            .toString()
-                            .padLeft(2, '0');
-                        minutesStr = ((newTick / 60) % 60)
-                            .floor()
-                            .toString()
-                            .padLeft(2, '0');
-                        secondsStr =
-                            (newTick % 60).floor().toString().padLeft(2, '0');
-                      });
-                    });
-                  },
-                  color: Colors.green,
-                  child: Text(
-                    'START',
-                    style: TextStyle(
-                      fontSize: 20.0,
+            SizedBox(
+              height: 250.0,
+              child: Stack(
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                      width: 250,
+                      height: 250,
+                      child: new CircularProgressIndicator(
+                        strokeWidth: 15,
+                        value: (double.parse(secondsStr) % 60) / 60,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                        backgroundColor: Colors.grey,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(width: 40.0),
-                RaisedButton(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                  onPressed: () {
-                    timerSubscription.cancel();
-                    timerStream = null;
-                    setState(() {
-                      hoursStr = '00';
-                      minutesStr = '00';
-                      secondsStr = '00';
-                    });
-                  },
-                  color: Colors.red,
-                  child: Text(
-                    'RESET',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                    ),
-                  ),
-                ),
-              ],
+                  Center(child: Text("Test")),
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
-    );
-
-    @override
-    Widget sportifbuttonsection = Container(
-        height: 450,
-        width: 300,
-        padding: EdgeInsets.only(top: 150),
-        child: CircularProgressIndicator(
-          value: 0.5,
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-          backgroundColor: Colors.grey,
-          strokeWidth: 15,
-        ));
-
-    return Provider<MyMode>(
-      create: (context) => MyMode(),
-      child: Scaffold(
-        body: ListView(
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            Center(child: sportifbuttonsection),
           ],
         ),
       ),
