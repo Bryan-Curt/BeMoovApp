@@ -19,9 +19,9 @@ class Router {
       case 'aviitamConnexionPage':
         return MaterialPageRoute(builder: (_) => AviitamConnexion());
       case 'startPage':
-        return MaterialPageRoute(builder: (_) => StartView());
+        return MaterialPageRoute(builder: (_) => InitStartView());
       case 'simple':
-        return MaterialPageRoute(builder: (_) => SimpleMonitoring());
+        return MaterialPageRoute(builder: (_) => InitSimpleMonitoring());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

@@ -4,14 +4,19 @@ import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/user.dart';
 
 //classe de déppart avant de lancer l'activitée
-class StartView extends StatelessWidget {
+class InitStartView extends StatefulWidget {
+  @override
+  StartView createState() => StartView();
+}
+
+class StartView extends State<InitStartView> {
   @override
   Widget build(BuildContext context) {
     final mode = Provider.of<User>(context);
     var colorSimpleButton;
     var colorSportifButton;
     if (mode.modeIsSimple) {
-      colorSimpleButton = Colors.orange;
+      colorSimpleButton = Colors.green;
       colorSportifButton = Colors.grey;
     } else {
       colorSimpleButton = Colors.grey;
@@ -25,51 +30,101 @@ class StartView extends StatelessWidget {
           showDialog(
               context: context,
               builder: (context) {
-                return Dialog(
-                  insetPadding: EdgeInsets.only(top: 50),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
-                  elevation: 5,
-                  child: Container(
-                    height: 200.0,
-                    width: 360.0,
-                    child: ListView(
-                      children: <Widget>[
-                        SizedBox(height: 20),
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text(
-                            "Accueil",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
+                return StatefulBuilder(builder: (context, setState) {
+                  return Dialog(
+                    insetPadding: EdgeInsets.only(top: 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    elevation: 5,
+                    child: Container(
+                      height: 350.0,
+                      width: 360.0,
+                      child: ListView(
+                        children: <Widget>[
+                          SizedBox(height: 20),
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              "Accueil",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 17),
+                            ),
                           ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            /*...*/
-                          },
-                          child: Text(
-                            "Voir vos précédents entraînements",
-                            style:
-                                TextStyle(color: Colors.black54, fontSize: 17),
+                          FlatButton(
+                            onPressed: () {
+                              /*...*/
+                            },
+                            child: Text(
+                              "Voir vos précédents entraînements",
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 17),
+                            ),
                           ),
-                        ),
-                        FlatButton(
-                          onPressed: () {
-                            /*...*/
-                          },
-                          child: Text(
-                            "Moyenne de vos efforts",
-                            style:
-                                TextStyle(color: Colors.black54, fontSize: 17),
+                          FlatButton(
+                            onPressed: () {
+                              /*...*/
+                            },
+                            child: Text(
+                              "Moyenne de vos efforts",
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 17),
+                            ),
                           ),
-                        )
-                      ],
+                          Divider(color: Colors.black),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 20),
+                            child: FlatButton(
+                              onPressed: () async {
+                                mode.modeIsSimple = true;
+                                setState(() {
+                                  colorSimpleButton = Colors.green;
+                                  colorSportifButton = Colors.grey;
+                                });
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "MODE SIMPLE",
+                                style: TextStyle(color: colorSimpleButton),
+                              ),
+                              padding: EdgeInsets.all(20),
+                              shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                      color: colorSimpleButton,
+                                      width: 2,
+                                      style: BorderStyle.solid),
+                                  borderRadius: BorderRadius.circular(20)),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 40),
+                            child: FlatButton(
+                              onPressed: () async {
+                                mode.modeIsSimple = false;
+                                setState(() {
+                                  colorSimpleButton = Colors.grey;
+                                  colorSportifButton = Colors.orange;
+                                });
+                                Navigator.pop(context);
+                              },
+                              child: Text('MODE SPORTIF',
+                                  style: TextStyle(color: colorSportifButton)),
+                              padding: EdgeInsets.all(20),
+                              shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                      color: colorSportifButton,
+                                      width: 2,
+                                      style: BorderStyle.solid),
+                                  borderRadius: BorderRadius.circular(20)),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                });
               });
         },
         elevation: 0,
@@ -110,7 +165,13 @@ class StartView extends StatelessWidget {
     Widget buttonsection = Container(
         padding: EdgeInsets.symmetric(horizontal: 70),
         child: RawMaterialButton(
-          onPressed: () {},
+          onPressed: () {
+            if (mode.modeIsSimple) {
+              Navigator.pushNamed(context, 'simple');
+            } else {
+              Navigator.pushNamed(context, 'startPage');
+            }
+          },
           elevation: 2.0,
           fillColor: Colors.red,
           child: Icon(
@@ -120,42 +181,6 @@ class StartView extends StatelessWidget {
           padding: EdgeInsets.all(15.0),
           shape: CircleBorder(),
         ));
-
-    Widget simplebuttonsection = Container(
-      padding: EdgeInsets.only(top: 40, left: 70, right: 70),
-      child: FlatButton(
-        onPressed: () async {
-          Navigator.pushNamed(context, 'simple');
-          mode.modeIsSimple = true;
-        },
-        child: Text(
-          "MODE SIMPLE",
-          style: TextStyle(color: colorSimpleButton),
-        ),
-        padding: EdgeInsets.all(20),
-        shape: RoundedRectangleBorder(
-            side: BorderSide(
-                color: colorSimpleButton, width: 2, style: BorderStyle.solid),
-            borderRadius: BorderRadius.circular(20)),
-      ),
-    );
-
-    Widget sportifbuttonsection = Container(
-      padding: EdgeInsets.only(top: 20, left: 70, right: 70),
-      child: FlatButton(
-        onPressed: () async {
-          Navigator.pushNamed(context, 'startPage');
-          mode.modeIsSimple = false;
-        },
-        child:
-            Text('MODE SPORTIF', style: TextStyle(color: colorSportifButton)),
-        padding: EdgeInsets.all(20),
-        shape: RoundedRectangleBorder(
-            side: BorderSide(
-                color: colorSportifButton, width: 2, style: BorderStyle.solid),
-            borderRadius: BorderRadius.circular(20)),
-      ),
-    );
 
     return Provider<MyMode>(
       create: (context) => MyMode(),
@@ -168,8 +193,6 @@ class StartView extends StatelessWidget {
             imagesection,
             titlesection,
             buttonsection,
-            simplebuttonsection,
-            sportifbuttonsection,
           ],
         ),
       ),
