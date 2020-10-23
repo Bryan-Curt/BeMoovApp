@@ -30,4 +30,12 @@ class User {
     _modeIsSimple = newValue;
     //notifyListeners();
   }
+
+  String _mainDisplayedData = "bpm";
+  String get mainDisplayedData => _mainDisplayedData;
+
+  set mainDisplayedData(String newValue) {
+    _mainDisplayedData = newValue;
+    //notifyListeners();
+  }
 }
