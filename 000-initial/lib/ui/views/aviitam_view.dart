@@ -14,19 +14,19 @@ class AviitamConnexion extends StatelessWidget {
             Text(
               "connexion aviitam pas encore implémentée",
             ),
-            FlatButton(
-              onPressed: () async {
-                Navigator.pushNamed(context, 'startPage');
-              },
-              child: Text('ECRAN DEPART', style: TextStyle(color: Colors.red)),
-              textColor: Colors.red,
-              padding: EdgeInsets.all(20),
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                      color: Colors.red, width: 1, style: BorderStyle.solid),
-                  borderRadius: BorderRadius.circular(25)),
-            ),
           ],
+        ),
+        bottomNavigationBar: FlatButton(
+          onPressed: () async {
+            Navigator.pushNamed(context, 'startPage');
+          },
+          child: Text('ECRAN DEPART', style: TextStyle(color: Colors.red)),
+          textColor: Colors.red,
+          padding: EdgeInsets.all(20),
+          shape: RoundedRectangleBorder(
+              side: BorderSide(
+                  color: Colors.red, width: 1, style: BorderStyle.solid),
+              borderRadius: BorderRadius.circular(25)),
         ),
       ),
     );

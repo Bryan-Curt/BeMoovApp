@@ -14,20 +14,19 @@ class BleConnexion extends StatelessWidget {
             Text(
               "BLE pas encore implémenté",
             ),
-            FlatButton(
-              onPressed: () async {
-                Navigator.pushNamed(context, 'aviitamConnexionPage');
-              },
-              child: Text('CONNEXION AVIITAM',
-                  style: TextStyle(color: Colors.red)),
-              textColor: Colors.red,
-              padding: EdgeInsets.all(20),
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                      color: Colors.red, width: 1, style: BorderStyle.solid),
-                  borderRadius: BorderRadius.circular(25)),
-            ),
           ],
+        ),
+        bottomNavigationBar: FlatButton(
+          onPressed: () async {
+            Navigator.pushNamed(context, 'aviitamConnexionPage');
+          },
+          child: Text('CONNEXION AVIITAM', style: TextStyle(color: Colors.red)),
+          textColor: Colors.red,
+          padding: EdgeInsets.all(20),
+          shape: RoundedRectangleBorder(
+              side: BorderSide(
+                  color: Colors.red, width: 1, style: BorderStyle.solid),
+              borderRadius: BorderRadius.circular(25)),
         ),
       ),
     );
