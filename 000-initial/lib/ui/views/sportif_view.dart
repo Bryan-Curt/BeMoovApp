@@ -100,6 +100,8 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
+    const test = "one";
+
     final mainDisplayed = Provider.of<User>(context);
 
     if (secondsStr == '00' && minutesStr == '00') {
@@ -107,7 +109,8 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
     }
 
     Widget menusection = Container(
-        padding: const EdgeInsets.only(top: 20, right: 0, left: 325),
+        padding: EdgeInsets.only(
+            top: screenHeight * 0.005, right: 0, left: screenWidth * 0.8),
         child: RawMaterialButton(
           onPressed: () {
             _scaffoldKey.currentState.openEndDrawer();
@@ -263,14 +266,17 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                 )),
             Container(
               width: screenWidth * .5,
-              child: ListTile(
-                title: Text('RYTHME CARDIAQUE', textAlign: TextAlign.center),
-                leading: Icon(
-                  Icons.chevron_right,
-                  color: Colors.black,
-                  size: 40.0,
-                ),
-                onTap: () {
+              child: FlatButton(
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  if (mainDataUnit == "BPM")
+                    Icon(
+                      Icons.chevron_right,
+                      color: Colors.black,
+                      size: 40.0,
+                    ),
+                  Text('RYTHME CARDIAQUE', textAlign: TextAlign.center),
+                ]),
+                onPressed: () {
                   // Update the state of the app.
                   // ...
                 },
@@ -278,14 +284,17 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
             ),
             Container(
               width: screenWidth * .5,
-              child: ListTile(
-                title: Text('VITESSE', textAlign: TextAlign.center),
-                leading: Icon(
-                  Icons.chevron_right,
-                  color: Colors.black,
-                  size: 40.0,
-                ),
-                onTap: () {
+              child: FlatButton(
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  if (mainDataUnit == "KM/H")
+                    Icon(
+                      Icons.chevron_right,
+                      color: Colors.black,
+                      size: 40.0,
+                    ),
+                  Text('VITESSE', textAlign: TextAlign.center),
+                ]),
+                onPressed: () {
                   // Update the state of the app.
                   // ...
                 },
@@ -293,9 +302,17 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
             ),
             Container(
               width: screenWidth * .5,
-              child: ListTile(
-                title: Text('DISTANCE', textAlign: TextAlign.center),
-                onTap: () {
+              child: FlatButton(
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  if (mainDataUnit == "KM")
+                    Icon(
+                      Icons.chevron_right,
+                      color: Colors.black,
+                      size: 40.0,
+                    ),
+                  Text('DISTANCE', textAlign: TextAlign.center),
+                ]),
+                onPressed: () {
                   // Update the state of the app.
                   // ...
                 },
@@ -303,9 +320,17 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
             ),
             Container(
               width: screenWidth * .5,
-              child: ListTile(
-                title: Text('PUISSANCE', textAlign: TextAlign.center),
-                onTap: () {
+              child: FlatButton(
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  if (mainDataUnit == "WATTS")
+                    Icon(
+                      Icons.chevron_right,
+                      color: Colors.transparent,
+                      size: 40.0,
+                    ),
+                  Text('PUISSANCE', textAlign: TextAlign.center),
+                ]),
+                onPressed: () {
                   // Update the state of the app.
                   // ...
                 },
@@ -313,9 +338,17 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
             ),
             Container(
               width: screenWidth * .5,
-              child: ListTile(
-                title: Text('CADENCE', textAlign: TextAlign.center),
-                onTap: () {
+              child: FlatButton(
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  if (mainDataUnit == "RPM")
+                    Icon(
+                      Icons.chevron_right,
+                      color: Colors.black,
+                      size: 40.0,
+                    ),
+                  Text('CADENCE', textAlign: TextAlign.center),
+                ]),
+                onPressed: () {
                   // Update the state of the app.
                   // ...
                 },
