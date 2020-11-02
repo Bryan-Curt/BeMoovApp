@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/user.dart';
+import 'package:responsive_screen/responsive_screen.dart';
 
 //classe de déppart avant de lancer l'activitée
 class InitStartView extends StatefulWidget {
@@ -12,6 +13,8 @@ class InitStartView extends StatefulWidget {
 class StartView extends State<InitStartView> {
   @override
   Widget build(BuildContext context) {
+    dynamic screenHeight = MediaQuery.of(context).size.height;
+    dynamic screenWidth = MediaQuery.of(context).size.width;
     final mode = Provider.of<User>(context);
     var colorSimpleButton;
     var colorSportifButton;
@@ -24,7 +27,8 @@ class StartView extends State<InitStartView> {
     }
 
     Widget menusection = Container(
-      padding: const EdgeInsets.only(top: 20, right: 0, left: 325),
+      padding: EdgeInsets.only(
+          top: screenHeight * .025, right: 0, left: screenWidth * 0.80),
       child: RawMaterialButton(
         onPressed: () {
           showDialog(
@@ -32,16 +36,16 @@ class StartView extends State<InitStartView> {
               builder: (context) {
                 return StatefulBuilder(builder: (context, setState) {
                   return Dialog(
-                    insetPadding: EdgeInsets.only(top: 50),
+                    insetPadding: EdgeInsets.only(top: screenHeight * .065),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
                     elevation: 5,
                     child: Container(
-                      height: 350.0,
-                      width: 360.0,
+                      height: screenHeight * .5,
+                      width: screenWidth * .91,
                       child: ListView(
                         children: <Widget>[
-                          SizedBox(height: 20),
+                          SizedBox(height: screenHeight * .025),
                           FlatButton(
                             onPressed: () {
                               Navigator.pop(context);
@@ -75,7 +79,8 @@ class StartView extends State<InitStartView> {
                           Divider(color: Colors.black),
                           Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 20),
+                                horizontal: screenHeight * .05,
+                                vertical: screenHeight * .025),
                             child: FlatButton(
                               onPressed: () async {
                                 mode.modeIsSimple = true;
@@ -89,7 +94,7 @@ class StartView extends State<InitStartView> {
                                 "MODE SIMPLE",
                                 style: TextStyle(color: colorSimpleButton),
                               ),
-                              padding: EdgeInsets.all(20),
+                              padding: EdgeInsets.all(screenHeight * .025),
                               shape: RoundedRectangleBorder(
                                   side: BorderSide(
                                       color: colorSimpleButton,
@@ -99,7 +104,8 @@ class StartView extends State<InitStartView> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 40),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: screenHeight * .05),
                             child: FlatButton(
                               onPressed: () async {
                                 mode.modeIsSimple = false;
@@ -111,7 +117,7 @@ class StartView extends State<InitStartView> {
                               },
                               child: Text('MODE SPORTIF',
                                   style: TextStyle(color: colorSportifButton)),
-                              padding: EdgeInsets.all(20),
+                              padding: EdgeInsets.all(screenHeight * .025),
                               shape: RoundedRectangleBorder(
                                   side: BorderSide(
                                       color: colorSportifButton,
@@ -132,15 +138,15 @@ class StartView extends State<InitStartView> {
         splashColor: Colors.black26,
         child: Icon(
           Icons.dehaze,
-          size: 40.0,
+          size: screenHeight * .05,
         ),
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(screenHeight * .017),
         shape: CircleBorder(),
       ),
     );
 
     Widget imagesection = Container(
-      padding: const EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(top: screenHeight * .011),
       child: Image.asset(
         'images/logoaccueil1.png',
         //fit: BoxFit.cover,
@@ -150,20 +156,21 @@ class StartView extends State<InitStartView> {
     );
 
     Widget titlesection = Container(
-      padding: const EdgeInsets.only(top: 30, bottom: 90),
+      padding: EdgeInsets.only(
+          top: screenHeight * .0335, bottom: screenHeight * .15),
       child: Text(
         'BEMOOV',
         style: TextStyle(
           fontFamily: 'RobotoThin',
           fontStyle: FontStyle.normal,
-          fontSize: 50,
+          fontSize: screenHeight * .07,
         ),
         textAlign: TextAlign.center,
       ),
     );
 
     Widget buttonsection = Container(
-        padding: EdgeInsets.symmetric(horizontal: 70),
+        padding: EdgeInsets.symmetric(horizontal: screenHeight * .08),
         child: RawMaterialButton(
           onPressed: () {
             if (mode.modeIsSimple) {
@@ -176,9 +183,9 @@ class StartView extends State<InitStartView> {
           fillColor: Colors.red,
           child: Icon(
             Icons.play_arrow,
-            size: 100.0,
+            size: screenHeight * .13,
           ),
-          padding: EdgeInsets.all(15.0),
+          padding: EdgeInsets.all(screenHeight * .02),
           shape: CircleBorder(),
         ));
 
@@ -186,7 +193,7 @@ class StartView extends State<InitStartView> {
       create: (context) => MyMode(),
       child: Scaffold(
         body: ListView(
-          padding: EdgeInsets.symmetric(vertical: 20),
+          padding: EdgeInsets.symmetric(vertical: screenHeight * .025),
           physics: const NeverScrollableScrollPhysics(),
           children: [
             menusection,
