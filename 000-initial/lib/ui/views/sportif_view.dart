@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/mainDisplayed.dart';
 import 'package:provider_architecture/core/models/user.dart';
+import 'package:responsive_screen/responsive_screen.dart';
 
 class InitSportifMonitoring extends StatefulWidget {
   @override
@@ -97,6 +98,8 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
 
   @override
   Widget build(BuildContext context) {
+    dynamic screenHeight = MediaQuery.of(context).size.height;
+    dynamic screenWidth = MediaQuery.of(context).size.width;
     final mainDisplayed = Provider.of<User>(context);
 
     if (secondsStr == '00' && minutesStr == '00') {
@@ -250,19 +253,73 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   padding: EdgeInsets.all(5.0),
                   shape: CircleBorder(),
                 )),
-            ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+            Container(
+                width: screenWidth * .5,
+                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 50),
+                child: Text(
+                  'DONNÉE PRINCIPALE',
+                  style: TextStyle(fontSize: 30),
+                  textAlign: TextAlign.center,
+                )),
+            Container(
+              width: screenWidth * .5,
+              child: ListTile(
+                title: Text('RYTHME CARDIAQUE', textAlign: TextAlign.center),
+                leading: Icon(
+                  Icons.chevron_right,
+                  color: Colors.black,
+                  size: 40.0,
+                ),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
             ),
-            ListTile(
-              title: Text('Item 2'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+            Container(
+              width: screenWidth * .5,
+              child: ListTile(
+                title: Text('VITESSE', textAlign: TextAlign.center),
+                leading: Icon(
+                  Icons.chevron_right,
+                  color: Colors.black,
+                  size: 40.0,
+                ),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+            ),
+            Container(
+              width: screenWidth * .5,
+              child: ListTile(
+                title: Text('DISTANCE', textAlign: TextAlign.center),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+            ),
+            Container(
+              width: screenWidth * .5,
+              child: ListTile(
+                title: Text('PUISSANCE', textAlign: TextAlign.center),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+            ),
+            Container(
+              width: screenWidth * .5,
+              child: ListTile(
+                title: Text('CADENCE', textAlign: TextAlign.center),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
             ),
           ],
         )));
