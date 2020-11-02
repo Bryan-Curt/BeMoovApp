@@ -19,7 +19,7 @@ class AviitamConnexion extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: Container(
-          padding: EdgeInsets.only(bottom: 100),
+          padding: EdgeInsets.only(bottom: screenHeight * 0.112),
           child: FlatButton(
             onPressed: () async {
               Navigator.pushNamed(context, 'startPage');
