@@ -8,7 +8,6 @@ class AviitamConnexion extends StatelessWidget {
       title: 'Flutter layout demo',
       home: Scaffold(
         body: ListView(
-          physics: const NeverScrollableScrollPhysics(),
           padding: EdgeInsets.symmetric(vertical: 700),
           children: [
             Text(
@@ -16,17 +15,20 @@ class AviitamConnexion extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: FlatButton(
-          onPressed: () async {
-            Navigator.pushNamed(context, 'startPage');
-          },
-          child: Text('ECRAN DEPART', style: TextStyle(color: Colors.red)),
-          textColor: Colors.red,
-          padding: EdgeInsets.all(20),
-          shape: RoundedRectangleBorder(
-              side: BorderSide(
-                  color: Colors.red, width: 1, style: BorderStyle.solid),
-              borderRadius: BorderRadius.circular(25)),
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.only(bottom: 100),
+          child: FlatButton(
+            onPressed: () async {
+              Navigator.pushNamed(context, 'startPage');
+            },
+            child: Text('ECRAN DEPART', style: TextStyle(color: Colors.red)),
+            textColor: Colors.red,
+            padding: EdgeInsets.all(20),
+            shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Colors.red, width: 1, style: BorderStyle.solid),
+                borderRadius: BorderRadius.circular(25)),
+          ),
         ),
       ),
     );
