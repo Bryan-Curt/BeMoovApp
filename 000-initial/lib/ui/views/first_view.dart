@@ -13,6 +13,7 @@ class FirstView extends StatelessWidget {
       // premier widget gérant l'image
       //height: screenHeight,
       width: screenWidth,
+      padding: EdgeInsets.only(top: screenHeight * 0.06),
       child: Image.asset(
         'images/logoaccueil1.png',
         fit: BoxFit.cover,
