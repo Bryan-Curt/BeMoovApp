@@ -12,14 +12,31 @@ class InitStartView extends StatefulWidget {
 }
 
 class StartView extends State<InitStartView> {
+  bool _isSimple = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadIsSimple();
+  }
+
+  _loadIsSimple() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isSimple = (prefs.getBool('isSimple') ??
+          true); // Try reading data from the mainData key. If it doesn't exist, return 0.
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
     final mode = Provider.of<User>(context);
+
     var colorSimpleButton;
     var colorSportifButton;
-    if (mode.modeIsSimple) {
+    if (_isSimple) {
       colorSimpleButton = Colors.green;
       colorSportifButton = Colors.grey;
     } else {
@@ -84,8 +101,10 @@ class StartView extends State<InitStartView> {
                                 vertical: screenHeight * .025),
                             child: FlatButton(
                               onPressed: () async {
-                                mode.modeIsSimple = true;
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
                                 setState(() {
+                                  prefs.setBool('isSimple', true);
                                   colorSimpleButton = Colors.green;
                                   colorSportifButton = Colors.grey;
                                 });
@@ -109,8 +128,11 @@ class StartView extends State<InitStartView> {
                                 horizontal: screenHeight * .05),
                             child: FlatButton(
                               onPressed: () async {
-                                mode.modeIsSimple = false;
+                                SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
                                 setState(() {
+                                  prefs.setBool('isSimple', false);
+
                                   colorSimpleButton = Colors.grey;
                                   colorSportifButton = Colors.orange;
                                 });
@@ -174,7 +196,7 @@ class StartView extends State<InitStartView> {
         padding: EdgeInsets.symmetric(horizontal: screenHeight * .08),
         child: RawMaterialButton(
           onPressed: () {
-            if (mode.modeIsSimple) {
+            if (_isSimple) {
               Navigator.pushNamed(context, 'simple');
             } else {
               Navigator.pushNamed(context, 'sportif');

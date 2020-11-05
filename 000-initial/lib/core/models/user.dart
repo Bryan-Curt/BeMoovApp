@@ -23,14 +23,6 @@ class User {
     return data;
   }
 
-  bool _modeIsSimple = true;
-  bool get modeIsSimple => _modeIsSimple;
-
-  set modeIsSimple(bool newValue) {
-    _modeIsSimple = newValue;
-    //notifyListeners();
-  }
-
   String _mainDisplayedData = "BPM";
   String get mainDisplayedData => _mainDisplayedData;
 
