@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/user.dart';
+import 'package:responsive_screen/responsive_screen.dart';
 
 class InitSimpleMonitoring extends StatefulWidget {
   @override
@@ -70,23 +71,25 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
 
   @override
   Widget build(BuildContext context) {
+    dynamic screenHeight = MediaQuery.of(context).size.height;
+    dynamic screenWidth = MediaQuery.of(context).size.width;
     if (secondsStr == '00' && minutesStr == '00') {
       initStopWatch();
     }
 
     Widget stopwatchsection = Container(
-      padding: EdgeInsets.only(top: 50),
+      padding: EdgeInsets.only(top: screenHeight * 0.060),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("TEMPS",
               style: TextStyle(
-                fontSize: 20.0,
+                fontSize: screenHeight * 0.025,
               )),
           Text(
             "$hoursStr:$minutesStr:$secondsStr",
             style: TextStyle(
-              fontSize: 70.0,
+              fontSize: screenHeight * 0.10,
             ),
           ),
         ],
@@ -99,10 +102,10 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
         children: <Widget>[
           Center(
             child: Container(
-              width: 250,
-              height: 250,
+              width: screenWidth * 0.60,
+              height: screenWidth * 0.60,
               child: new CircularProgressIndicator(
-                strokeWidth: 15,
+                strokeWidth: screenWidth * 0.036,
                 value: (double.parse(secondsStr) % 60) / 60,
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
                 backgroundColor: Colors.grey,
@@ -116,7 +119,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
                     .toString() +
                 " %",
             style: TextStyle(
-              fontSize: 50.0,
+              fontSize: screenHeight * 0.065,
             ),
           )),
         ],
@@ -124,7 +127,8 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
     );
 
     Widget pausebutton = Container(
-      padding: EdgeInsets.symmetric(horizontal: 70, vertical: 50),
+      padding: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.169, vertical: screenHeight * 0.056),
       child: FlatButton(
         color: Colors.red,
         onPressed: () async {},
@@ -132,7 +136,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
           "PAUSE",
           style: TextStyle(color: Colors.white, fontSize: 50),
         ),
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(screenHeight * 0.022),
         shape: RoundedRectangleBorder(
             side: BorderSide(
                 color: Colors.red, width: 2, style: BorderStyle.solid),
@@ -144,7 +148,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
       create: (context) => MyMode(),
       child: Scaffold(
         body: ListView(
-          padding: EdgeInsets.symmetric(vertical: 20),
+          padding: EdgeInsets.symmetric(vertical: screenHeight * 0.022),
           physics: const NeverScrollableScrollPhysics(),
           children: [stopwatchsection, circularprogressbarsection],
         ),
