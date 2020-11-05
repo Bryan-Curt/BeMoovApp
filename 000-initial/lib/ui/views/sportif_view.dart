@@ -127,18 +127,18 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         ));
 
     Widget stopwatchsection = Container(
-      padding: EdgeInsets.only(top: 0, bottom: 15),
+      //padding: EdgeInsets.only(top: 0, bottom: 0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("TEMPS",
               style: TextStyle(
-                fontSize: 20.0,
+                fontSize: screenHeight * 0.022,
               )),
           Text(
             "$hoursStr:$minutesStr:$secondsStr",
             style: TextStyle(
-              fontSize: 65.0,
+              fontSize: screenHeight * 0.08,
             ),
           ),
         ],
@@ -146,15 +146,16 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
     );
 
     Widget pausebutton = Container(
-      padding: EdgeInsets.symmetric(horizontal: 70, vertical: 50),
+      padding: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.17, vertical: screenHeight * 0.02),
       child: FlatButton(
         color: Colors.red,
         onPressed: () async {},
         child: Text(
           "PAUSE",
-          style: TextStyle(color: Colors.white, fontSize: 50),
+          style: TextStyle(color: Colors.white, fontSize: screenHeight * 0.06),
         ),
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(screenHeight * 0.022),
         shape: RoundedRectangleBorder(
             side: BorderSide(
                 color: Colors.red, width: 2, style: BorderStyle.solid),
@@ -164,72 +165,79 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
 
     Widget separator = Divider(
       color: Colors.black,
-      indent: 40,
-      endIndent: 40,
+      indent: screenWidth * 0.097,
+      endIndent: screenWidth * 0.097,
     );
 
     Widget mainData = Container(
-        padding: EdgeInsets.only(top: 20, bottom: 10),
+        padding: EdgeInsets.only(
+            top: screenHeight * 0.011, bottom: screenHeight * 0.011),
         child: Column(children: [
-          Text(mainDataLabel, style: TextStyle(fontSize: 20)),
+          Text(mainDataLabel, style: TextStyle(fontSize: screenHeight * 0.03)),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            Image.asset("images/" + mainDataImg, height: 90),
-            Text(mainDataValue, style: TextStyle(fontSize: 90)),
-            Text(mainDataUnit, style: TextStyle(fontSize: 40)),
+            Image.asset("images/" + mainDataImg, height: screenHeight * 0.1),
+            Text(mainDataValue, style: TextStyle(fontSize: screenHeight * 0.1)),
+            Text(mainDataUnit,
+                style: TextStyle(fontSize: screenHeight * 0.044)),
           ])
         ]));
 
     Widget tlData = Container(
-        padding: EdgeInsets.only(right: 30, bottom: 15),
+        padding: EdgeInsets.only(
+            right: screenWidth * 0.25, bottom: screenHeight * 0.016),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(tlDataLabel, style: TextStyle(fontSize: 25)),
-            Text(tlDataValue, style: TextStyle(fontSize: 40)),
-            Text(tlDataUnit, style: TextStyle(fontSize: 25)),
+            Text(tlDataLabel, style: TextStyle(fontSize: screenHeight * 0.035)),
+            Text(tlDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
+            Text(tlDataUnit, style: TextStyle(fontSize: screenHeight * 0.035)),
           ],
         ));
 
     Widget trData = Container(
-        padding: EdgeInsets.only(left: 30, bottom: 15),
+        padding: EdgeInsets.only(bottom: screenHeight * 0.016),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(trDataLabel, style: TextStyle(fontSize: 25)),
-            Text(trDataValue, style: TextStyle(fontSize: 40)),
-            Text(trDataUnit, style: TextStyle(fontSize: 25)),
+            Text(trDataLabel, style: TextStyle(fontSize: screenHeight * 0.035)),
+            Text(trDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
+            Text(trDataUnit, style: TextStyle(fontSize: screenHeight * 0.035)),
           ],
         ));
 
     Widget blData = Container(
-        padding: EdgeInsets.only(right: 15, top: 15),
+        padding: EdgeInsets.only(
+            right: screenWidth * 0.25, top: screenHeight * 0.01),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(blDataLabel, style: TextStyle(fontSize: 25)),
-            Text(blDataValue, style: TextStyle(fontSize: 40)),
-            Text(blDataUnit, style: TextStyle(fontSize: 25)),
+            Text(blDataLabel, style: TextStyle(fontSize: screenHeight * 0.025)),
+            Text(blDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
+            Text(blDataUnit, style: TextStyle(fontSize: screenHeight * 0.035)),
           ],
         ));
 
     Widget brData = Container(
-        padding: EdgeInsets.only(left: 15, top: 15),
+        padding: EdgeInsets.only(left: 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(brDataLabel, style: TextStyle(fontSize: 25)),
-            Text(brDataValue, style: TextStyle(fontSize: 40)),
-            Text(brDataUnit, style: TextStyle(fontSize: 25)),
+            Text(brDataLabel, style: TextStyle(fontSize: screenHeight * 0.035)),
+            Text(brDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
+            Text(brDataUnit, style: TextStyle(fontSize: screenHeight * 0.035)),
           ],
         ));
 
     Widget secondaryData = Container(
-        padding: EdgeInsets.only(left: 75, right: 75, top: 20),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        padding: EdgeInsets.only(top: screenHeight * 0.01),
+        child: Column(children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [tlData, trData],
           ),
-          Row(children: [blData, brData])
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [blData, brData])
         ]));
 
     Widget tiroir = Container(
