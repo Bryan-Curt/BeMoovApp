@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/user.dart';
 import 'package:responsive_screen/responsive_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //classe de déppart avant de lancer l'activitée
 class InitStartView extends StatefulWidget {

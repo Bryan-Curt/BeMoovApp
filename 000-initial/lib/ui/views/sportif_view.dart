@@ -46,6 +46,8 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
   String brDataUnit = "RPM";
   String brDataImg = "pulse.png";
 
+  List<String> map = ["BPM", "KM/H", "KM", "WATTS", "RPM"];
+
   Stream<int> stopWatchStream() {
     StreamController<int> streamController;
     Timer timer;
