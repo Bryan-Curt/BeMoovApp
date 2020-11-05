@@ -184,7 +184,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
 
     Widget tlData = Container(
         padding: EdgeInsets.only(
-            right: screenWidth * 0.25, bottom: screenHeight * 0.016),
+            left: screenWidth * 0.20, bottom: screenHeight * 0.016),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -195,7 +195,8 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         ));
 
     Widget trData = Container(
-        padding: EdgeInsets.only(bottom: screenHeight * 0.016),
+        padding: EdgeInsets.only(
+            left: screenWidth * 0.20, bottom: screenHeight * 0.016),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -206,19 +207,18 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         ));
 
     Widget blData = Container(
-        padding: EdgeInsets.only(
-            right: screenWidth * 0.25, top: screenHeight * 0.01),
+        padding: EdgeInsets.only(left: screenWidth * 0.17),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(blDataLabel, style: TextStyle(fontSize: screenHeight * 0.025)),
+            Text(blDataLabel, style: TextStyle(fontSize: screenHeight * 0.035)),
             Text(blDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
             Text(blDataUnit, style: TextStyle(fontSize: screenHeight * 0.035)),
           ],
         ));
 
     Widget brData = Container(
-        padding: EdgeInsets.only(left: 0),
+        padding: EdgeInsets.only(left: screenWidth * 0.15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -232,11 +232,11 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         padding: EdgeInsets.only(top: screenHeight * 0.01),
         child: Column(children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
             children: [tlData, trData],
           ),
           Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.center,
               children: [blData, brData])
         ]));
 
