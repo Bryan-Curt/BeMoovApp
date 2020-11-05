@@ -19,6 +19,16 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   String minutesStr = '00';
   String secondsStr = '00';
 
+  String leftDataLabel = "BPM";
+  String leftDataValue = "175";
+  String leftDataUnit = "BPM";
+  String leftDataImg = "pulse.png";
+
+  String rightDataLabel = "Vitesse";
+  String rightDataValue = "15.5";
+  String rightDataUnit = "KM/H";
+  String rightDataImg = "pulse.png";
+
   Stream<int> stopWatchStream() {
     StreamController<int> streamController;
     Timer timer;
@@ -126,9 +136,40 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
       ),
     );
 
+    Widget leftData = Container(
+        padding: EdgeInsets.only(right: screenWidth * 0.3),
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(leftDataLabel, style: TextStyle(fontSize: 25)),
+            Text(leftDataValue, style: TextStyle(fontSize: 40)),
+            Text(leftDataUnit, style: TextStyle(fontSize: 25)),
+          ],
+        ));
+
+    Widget rightData = Container(
+        //padding: EdgeInsets.only(left: 20),
+        child: Column(
+      // mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(rightDataLabel, style: TextStyle(fontSize: 25)),
+        Text(rightDataValue, style: TextStyle(fontSize: 40)),
+        Text(rightDataUnit, style: TextStyle(fontSize: 25)),
+      ],
+    ));
+
+    Widget secondaryData = Container(
+        padding: EdgeInsets.only(top: screenHeight * 0.03),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [leftData, rightData],
+          )
+        ]));
+
     Widget pausebutton = Container(
       padding: EdgeInsets.symmetric(
-          horizontal: screenWidth * 0.169, vertical: screenHeight * 0.056),
+          horizontal: screenWidth * 0.169, vertical: screenHeight * 0.030),
       child: FlatButton(
         color: Colors.red,
         onPressed: () async {},
@@ -150,7 +191,11 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
         body: ListView(
           padding: EdgeInsets.symmetric(vertical: screenHeight * 0.022),
           physics: const NeverScrollableScrollPhysics(),
-          children: [stopwatchsection, circularprogressbarsection],
+          children: [
+            stopwatchsection,
+            circularprogressbarsection,
+            secondaryData
+          ],
         ),
         bottomNavigationBar: pausebutton,
       ),
