@@ -184,7 +184,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
 
     Widget tlData = Container(
         padding: EdgeInsets.only(
-            left: screenWidth * 0.20, bottom: screenHeight * 0.016),
+            left: screenWidth * 0.12, bottom: screenHeight * 0.016),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -207,7 +207,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         ));
 
     Widget blData = Container(
-        padding: EdgeInsets.only(left: screenWidth * 0.17),
+        padding: EdgeInsets.only(left: screenWidth * 0.07),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
