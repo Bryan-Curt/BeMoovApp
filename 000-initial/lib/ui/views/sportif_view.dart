@@ -100,8 +100,6 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
-    const test = "one";
-
     final mainDisplayed = Provider.of<User>(context);
 
     if (secondsStr == '00' && minutesStr == '00') {
@@ -268,7 +266,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
               width: screenWidth * .5,
               child: FlatButton(
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (mainDataUnit == "BPM")
+                  if (mainDisplayed.mainDisplayedData == "BPM")
                     Icon(
                       Icons.chevron_right,
                       color: Colors.black,
@@ -277,8 +275,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   Text('RYTHME CARDIAQUE', textAlign: TextAlign.center),
                 ]),
                 onPressed: () {
-                  // Update the state of the app.
-                  // ...
+                  mainDisplayed.mainDisplayedData = "BPM";
                 },
               ),
             ),
@@ -286,7 +283,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
               width: screenWidth * .5,
               child: FlatButton(
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (mainDataUnit == "KM/H")
+                  if (mainDisplayed.mainDisplayedData == "KMH")
                     Icon(
                       Icons.chevron_right,
                       color: Colors.black,
@@ -295,8 +292,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   Text('VITESSE', textAlign: TextAlign.center),
                 ]),
                 onPressed: () {
-                  // Update the state of the app.
-                  // ...
+                  mainDisplayed.mainDisplayedData = "KMH";
                 },
               ),
             ),
@@ -304,7 +300,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
               width: screenWidth * .5,
               child: FlatButton(
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (mainDataUnit == "KM")
+                  if (mainDisplayed.mainDisplayedData == "KM")
                     Icon(
                       Icons.chevron_right,
                       color: Colors.black,
@@ -313,8 +309,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   Text('DISTANCE', textAlign: TextAlign.center),
                 ]),
                 onPressed: () {
-                  // Update the state of the app.
-                  // ...
+                  mainDisplayed.mainDisplayedData = "KM";
                 },
               ),
             ),
@@ -322,17 +317,16 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
               width: screenWidth * .5,
               child: FlatButton(
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (mainDataUnit == "WATTS")
+                  if (mainDisplayed.mainDisplayedData == "WATTS")
                     Icon(
                       Icons.chevron_right,
-                      color: Colors.transparent,
+                      color: Colors.black,
                       size: 40.0,
                     ),
                   Text('PUISSANCE', textAlign: TextAlign.center),
                 ]),
                 onPressed: () {
-                  // Update the state of the app.
-                  // ...
+                  mainDisplayed.mainDisplayedData = "WATTS";
                 },
               ),
             ),
@@ -340,7 +334,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
               width: screenWidth * .5,
               child: FlatButton(
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (mainDataUnit == "RPM")
+                  if (mainDisplayed.mainDisplayedData == "RPM")
                     Icon(
                       Icons.chevron_right,
                       color: Colors.black,
@@ -349,8 +343,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   Text('CADENCE', textAlign: TextAlign.center),
                 ]),
                 onPressed: () {
-                  // Update the state of the app.
-                  // ...
+                  mainDisplayed.mainDisplayedData = "RPM";
                 },
               ),
             ),

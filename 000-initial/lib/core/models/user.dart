@@ -31,7 +31,7 @@ class User {
     //notifyListeners();
   }
 
-  String _mainDisplayedData = "bpm";
+  String _mainDisplayedData = "BPM";
   String get mainDisplayedData => _mainDisplayedData;
 
   set mainDisplayedData(String newValue) {
