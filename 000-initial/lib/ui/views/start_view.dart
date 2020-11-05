@@ -28,11 +28,14 @@ class StartView extends State<InitStartView> {
     });
   }
 
+  _getIsSimple() async {}
+
   @override
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
     final mode = Provider.of<User>(context);
+    print(_isSimple);
 
     var colorSimpleButton;
     var colorSportifButton;
@@ -104,9 +107,12 @@ class StartView extends State<InitStartView> {
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();
                                 setState(() {
-                                  prefs.setBool('isSimple', true);
+                                  _isSimple = true;
+                                  prefs.setBool('isSimple', _isSimple);
                                   colorSimpleButton = Colors.green;
                                   colorSportifButton = Colors.grey;
+                                  print(_isSimple);
+                                  return _isSimple;
                                 });
                                 Navigator.pop(context);
                               },
@@ -131,10 +137,11 @@ class StartView extends State<InitStartView> {
                                 SharedPreferences prefs =
                                     await SharedPreferences.getInstance();
                                 setState(() {
-                                  prefs.setBool('isSimple', false);
-
+                                  _isSimple = false;
+                                  prefs.setBool('isSimple', _isSimple);
                                   colorSimpleButton = Colors.grey;
                                   colorSportifButton = Colors.orange;
+                                  print(_isSimple);
                                 });
                                 Navigator.pop(context);
                               },
@@ -196,6 +203,7 @@ class StartView extends State<InitStartView> {
         padding: EdgeInsets.symmetric(horizontal: screenHeight * .08),
         child: RawMaterialButton(
           onPressed: () {
+            print(_isSimple);
             if (_isSimple) {
               Navigator.pushNamed(context, 'simple');
             } else {
