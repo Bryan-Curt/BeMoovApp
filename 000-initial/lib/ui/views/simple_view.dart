@@ -25,7 +25,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   String leftDataImg = "pulse.png";
 
   String rightDataLabel = "Vitesse";
-  String rightDataValue = "15.5";
+  String rightDataValue = "175";
   String rightDataUnit = "KM/H";
   String rightDataImg = "pulse.png";
 
@@ -172,7 +172,9 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
           horizontal: screenWidth * 0.169, vertical: screenHeight * 0.030),
       child: FlatButton(
         color: Colors.red,
-        onPressed: () async {},
+        onPressed: () async {
+          Navigator.pushNamed(context, 'pause');
+        },
         child: Text(
           "PAUSE",
           style: TextStyle(color: Colors.white, fontSize: 50),

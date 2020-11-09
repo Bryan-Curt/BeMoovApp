@@ -183,8 +183,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         ]));
 
     Widget tlData = Container(
-        padding: EdgeInsets.only(
-            left: screenWidth * 0.12, bottom: screenHeight * 0.016),
+        padding: EdgeInsets.only(bottom: screenHeight * 0.016),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -207,7 +206,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         ));
 
     Widget blData = Container(
-        padding: EdgeInsets.only(left: screenWidth * 0.07),
+        padding: EdgeInsets.only(left: screenWidth * 0.14),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -218,7 +217,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         ));
 
     Widget brData = Container(
-        padding: EdgeInsets.only(left: screenWidth * 0.15),
+        padding: EdgeInsets.only(left: screenWidth * 0.18),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -232,11 +231,11 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         padding: EdgeInsets.only(top: screenHeight * 0.01),
         child: Column(children: [
           Row(
-            //mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [tlData, trData],
           ),
           Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
+              //mainAxisAlignment: MainAxisAlignment.center,
               children: [blData, brData])
         ]));
 
