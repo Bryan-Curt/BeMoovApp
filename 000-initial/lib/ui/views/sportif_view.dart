@@ -659,6 +659,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                     _isSportif = false;
                     prefs.setBool('isSportif', _isSportif);
                   });
+                  Navigator.pop(context);
                 },
                 child: Text('ASSISTANCE FORCÉE',
                     style: TextStyle(color: colorAssistance)),

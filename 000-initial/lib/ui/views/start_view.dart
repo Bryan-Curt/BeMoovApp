@@ -35,7 +35,6 @@ class StartView extends State<InitStartView> {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
     final mode = Provider.of<User>(context);
-    print(_isSimple);
 
     var colorSimpleButton;
     var colorSportifButton;
@@ -111,8 +110,6 @@ class StartView extends State<InitStartView> {
                                   prefs.setBool('isSimple', _isSimple);
                                   colorSimpleButton = Colors.green;
                                   colorSportifButton = Colors.grey;
-                                  print(_isSimple);
-                                  return _isSimple;
                                 });
                                 Navigator.pop(context);
                               },
@@ -141,7 +138,6 @@ class StartView extends State<InitStartView> {
                                   prefs.setBool('isSimple', _isSimple);
                                   colorSimpleButton = Colors.grey;
                                   colorSportifButton = Colors.orange;
-                                  print(_isSimple);
                                 });
                                 Navigator.pop(context);
                               },
@@ -203,7 +199,6 @@ class StartView extends State<InitStartView> {
         padding: EdgeInsets.symmetric(horizontal: screenHeight * .08),
         child: RawMaterialButton(
           onPressed: () {
-            print(_isSimple);
             if (_isSimple) {
               Navigator.pushNamed(context, 'simple');
             } else {
