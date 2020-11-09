@@ -16,11 +16,21 @@ class InitSportifMonitoring extends StatefulWidget {
 class SportifMonitoring extends State<InitSportifMonitoring> {
   //String _mainData = "BPM";
   List<String> _dataMap = ["BPM", "KM/H", "KM", "WATTS", "RPM"];
+  bool _isSportif = true;
 
   @override
   void initState() {
     super.initState();
+    _loadIsSportif();
     _mainDataIs();
+  }
+
+  _loadIsSportif() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isSportif = (prefs.getBool('isSportif') ??
+          true); // Try reading data from the mainData key. If it doesn't exist, return 0.
+    });
   }
 
   _mainDataIs() async {
@@ -118,6 +128,16 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
 
   @override
   Widget build(BuildContext context) {
+    var colorAssistance;
+    var colorSportifButton;
+    if (_isSportif) {
+      colorAssistance = Colors.grey;
+      colorSportifButton = Colors.orange;
+    } else {
+      colorAssistance = Colors.blue;
+      colorSportifButton = Colors.grey;
+    }
+
     switch (_dataMap[0]) {
       case "BPM":
         {
@@ -341,7 +361,6 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
           brDataUnit = "RPM";
         }
     }
-
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
 
@@ -625,6 +644,56 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                     Navigator.pop(context);
                   });
                 },
+              ),
+            ),
+            separator,
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: screenHeight * .05,
+                  vertical: screenHeight * .025),
+              child: FlatButton(
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  setState(() {
+                    _isSportif = false;
+                    prefs.setBool('isSportif', _isSportif);
+                  });
+                },
+                child: Text('ASSISTANCE FORCÉE',
+                    style: TextStyle(color: colorAssistance)),
+                padding: EdgeInsets.all(screenHeight * .025),
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        color: colorAssistance,
+                        width: 2,
+                        style: BorderStyle.solid),
+                    borderRadius: BorderRadius.circular(20)),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: screenHeight * .05),
+              child: FlatButton(
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  setState(() {
+                    _isSportif = true;
+                    prefs.setBool('isSportif', _isSportif);
+                  });
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "MODE SPORTIF",
+                  style: TextStyle(color: colorSportifButton),
+                ),
+                padding: EdgeInsets.all(screenHeight * .025),
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        color: colorSportifButton,
+                        width: 2,
+                        style: BorderStyle.solid),
+                    borderRadius: BorderRadius.circular(20)),
               ),
             ),
           ],
