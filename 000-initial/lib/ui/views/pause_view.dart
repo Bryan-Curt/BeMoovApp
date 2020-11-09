@@ -63,7 +63,7 @@ class PauseView extends State<InitPauseView> {
       child: Text('VOS PERFORMANCES EN COURS',
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: screenHeight * 0.05, fontWeight: FontWeight.bold)),
+              fontSize: screenHeight * 0.04, fontWeight: FontWeight.bold)),
     );
 
     Widget firstData = Container(
@@ -72,12 +72,12 @@ class PauseView extends State<InitPauseView> {
       children: [
         Text(firstDataLabel,
             style: TextStyle(
-                fontSize: screenHeight * 0.03, fontWeight: FontWeight.bold)),
+                fontSize: screenHeight * 0.025, fontWeight: FontWeight.bold)),
         Text(' : ',
             style: TextStyle(
-                fontSize: screenHeight * 0.03, fontWeight: FontWeight.bold)),
-        Text(firstDataValue, style: TextStyle(fontSize: screenHeight * 0.03)),
-        Text(firstDataUnit, style: TextStyle(fontSize: screenHeight * 0.03)),
+                fontSize: screenHeight * 0.025, fontWeight: FontWeight.bold)),
+        Text(firstDataValue, style: TextStyle(fontSize: screenHeight * 0.025)),
+        Text(firstDataUnit, style: TextStyle(fontSize: screenHeight * 0.025)),
       ],
     ));
 
@@ -88,16 +88,16 @@ class PauseView extends State<InitPauseView> {
           children: [
             Text(secondDataLabel,
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03,
+                    fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
             Text(' : ',
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03,
+                    fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
             Text(secondDataValue,
-                style: TextStyle(fontSize: screenHeight * 0.03)),
+                style: TextStyle(fontSize: screenHeight * 0.025)),
             Text(secondDataUnit,
-                style: TextStyle(fontSize: screenHeight * 0.03)),
+                style: TextStyle(fontSize: screenHeight * 0.025)),
           ],
         ));
 
@@ -108,16 +108,16 @@ class PauseView extends State<InitPauseView> {
           children: [
             Text(thirdDataLabel,
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03,
+                    fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
             Text(' : ',
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03,
+                    fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
             Text(thirdDataValue,
-                style: TextStyle(fontSize: screenHeight * 0.03)),
+                style: TextStyle(fontSize: screenHeight * 0.025)),
             Text(thirdDataUnit,
-                style: TextStyle(fontSize: screenHeight * 0.03)),
+                style: TextStyle(fontSize: screenHeight * 0.025)),
           ],
         ));
 
@@ -128,16 +128,16 @@ class PauseView extends State<InitPauseView> {
           children: [
             Text(fourthDataLabel,
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03,
+                    fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
             Text(' : ',
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03,
+                    fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
             Text(fourthDataValue,
-                style: TextStyle(fontSize: screenHeight * 0.03)),
+                style: TextStyle(fontSize: screenHeight * 0.025)),
             Text(fourthDataUnit,
-                style: TextStyle(fontSize: screenHeight * 0.03)),
+                style: TextStyle(fontSize: screenHeight * 0.025)),
           ],
         ));
 
@@ -148,16 +148,16 @@ class PauseView extends State<InitPauseView> {
           children: [
             Text(fifthDataLabel,
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03,
+                    fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
             Text(' : ',
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03,
+                    fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
             Text(fifthDataValue,
-                style: TextStyle(fontSize: screenHeight * 0.03)),
+                style: TextStyle(fontSize: screenHeight * 0.025)),
             Text(fifthDataUnit,
-                style: TextStyle(fontSize: screenHeight * 0.03)),
+                style: TextStyle(fontSize: screenHeight * 0.025)),
           ],
         ));
 
@@ -168,16 +168,16 @@ class PauseView extends State<InitPauseView> {
           children: [
             Text(sixthDataLabel,
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03,
+                    fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
             Text(' : ',
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03,
+                    fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
             Text(sixthDataValue,
-                style: TextStyle(fontSize: screenHeight * 0.03)),
+                style: TextStyle(fontSize: screenHeight * 0.025)),
             Text(sixthDataUnit,
-                style: TextStyle(fontSize: screenHeight * 0.03)),
+                style: TextStyle(fontSize: screenHeight * 0.025)),
           ],
         ));
 
@@ -248,7 +248,7 @@ class PauseView extends State<InitPauseView> {
     );
 
     Widget boutons = Container(
-        padding: EdgeInsets.only(top: screenHeight * 0.05),
+        padding: EdgeInsets.only(top: screenHeight * 0.1),
         child: Column(children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
