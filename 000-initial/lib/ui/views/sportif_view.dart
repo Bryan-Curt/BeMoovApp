@@ -6,6 +6,7 @@ import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/mainDisplayed.dart';
 import 'package:provider_architecture/core/models/user.dart';
 import 'package:responsive_screen/responsive_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class InitSportifMonitoring extends StatefulWidget {
   @override
@@ -13,6 +14,29 @@ class InitSportifMonitoring extends StatefulWidget {
 }
 
 class SportifMonitoring extends State<InitSportifMonitoring> {
+  //String _mainData = "BPM";
+  List<String> _dataMap = ["BPM", "KM/H", "KM", "WATTS", "RPM"];
+
+  @override
+  void initState() {
+    super.initState();
+    _mainDataIs();
+  }
+
+  _mainDataIs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _dataMap = (prefs.getStringList('dataMap') ??
+          [
+            "BPM",
+            "KM/H",
+            "KM",
+            "WATTS",
+            "RPM"
+          ]); // Try reading data from the mainData key. If it doesn't exist, return BPM.
+    });
+  }
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool flag = true;
   Stream<int> timerStream;
@@ -45,8 +69,6 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
   String brDataValue = "75";
   String brDataUnit = "RPM";
   String brDataImg = "pulse.png";
-
-  List<String> map = ["BPM", "KM/H", "KM", "WATTS", "RPM"];
 
   Stream<int> stopWatchStream() {
     StreamController<int> streamController;
@@ -102,7 +124,6 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
-    final mainDisplayed = Provider.of<User>(context);
 
     if (secondsStr == '00' && minutesStr == '00') {
       initStopWatch();
@@ -276,7 +297,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
               width: screenWidth * .5,
               child: FlatButton(
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (mainDisplayed.mainDisplayedData == "BPM")
+                  if (_dataMap[0] == "BPM")
                     Icon(
                       Icons.chevron_right,
                       color: Colors.black,
@@ -284,8 +305,13 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                     ),
                   Text('RYTHME CARDIAQUE', textAlign: TextAlign.center),
                 ]),
-                onPressed: () {
-                  mainDisplayed.mainDisplayedData = "BPM";
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  setState(() {
+                    _dataMap = ["BPM", "KM/H", "KM", "WATTS", "RPM"];
+                    prefs.setStringList('dataMap', _dataMap);
+                  });
                 },
               ),
             ),
@@ -293,7 +319,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
               width: screenWidth * .5,
               child: FlatButton(
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (mainDisplayed.mainDisplayedData == "KMH")
+                  if (_dataMap[0] == "KMH")
                     Icon(
                       Icons.chevron_right,
                       color: Colors.black,
@@ -301,8 +327,13 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                     ),
                   Text('VITESSE', textAlign: TextAlign.center),
                 ]),
-                onPressed: () {
-                  mainDisplayed.mainDisplayedData = "KMH";
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  setState(() {
+                    _dataMap = ["KMH", "BPM", "KM", "WATTS", "RPM"];
+                    prefs.setStringList('dataMap', _dataMap);
+                  });
                 },
               ),
             ),
@@ -310,7 +341,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
               width: screenWidth * .5,
               child: FlatButton(
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (mainDisplayed.mainDisplayedData == "KM")
+                  if (_dataMap[0] == "KM")
                     Icon(
                       Icons.chevron_right,
                       color: Colors.black,
@@ -318,8 +349,13 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                     ),
                   Text('DISTANCE', textAlign: TextAlign.center),
                 ]),
-                onPressed: () {
-                  mainDisplayed.mainDisplayedData = "KM";
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  setState(() {
+                    _dataMap = ["KM", "BPM", "KMH", "WATTS", "RPM"];
+                    prefs.setStringList('dataMap', _dataMap);
+                  });
                 },
               ),
             ),
@@ -327,7 +363,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
               width: screenWidth * .5,
               child: FlatButton(
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (mainDisplayed.mainDisplayedData == "WATTS")
+                  if (_dataMap[0] == "WATTS")
                     Icon(
                       Icons.chevron_right,
                       color: Colors.black,
@@ -335,8 +371,13 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                     ),
                   Text('PUISSANCE', textAlign: TextAlign.center),
                 ]),
-                onPressed: () {
-                  mainDisplayed.mainDisplayedData = "WATTS";
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  setState(() {
+                    _dataMap = ["WATTS", "KM/H", "KM", "BPM", "RPM"];
+                    prefs.setStringList('dataMap', _dataMap);
+                  });
                 },
               ),
             ),
@@ -344,7 +385,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
               width: screenWidth * .5,
               child: FlatButton(
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  if (mainDisplayed.mainDisplayedData == "RPM")
+                  if (_dataMap[0] == "RPM")
                     Icon(
                       Icons.chevron_right,
                       color: Colors.black,
@@ -352,8 +393,13 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                     ),
                   Text('CADENCE', textAlign: TextAlign.center),
                 ]),
-                onPressed: () {
-                  mainDisplayed.mainDisplayedData = "RPM";
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  setState(() {
+                    _dataMap = ["RPM", "BPM", "KM", "WATTS", "KMH"];
+                    prefs.setStringList('dataMap', _dataMap);
+                  });
                 },
               ),
             ),
