@@ -37,6 +37,31 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
     });
   }
 
+  String mainDataLabel;
+  String mainDataValue;
+  String mainDataUnit;
+  String mainDataImg;
+
+  String tlDataLabel;
+  String tlDataValue;
+  String tlDataUnit;
+  String tlDataImg;
+
+  String trDataLabel;
+  String trDataValue;
+  String trDataUnit;
+  String trDataImg;
+
+  String blDataLabel;
+  String blDataValue;
+  String blDataUnit;
+  String blDataImg;
+
+  String brDataLabel;
+  String brDataValue;
+  String brDataUnit;
+  String brDataImg;
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool flag = true;
   Stream<int> timerStream;
@@ -44,31 +69,6 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
   String hoursStr = '00';
   String minutesStr = '00';
   String secondsStr = '00';
-
-  String mainDataLabel = "Fréquence Cardiaque";
-  String mainDataValue = "175";
-  String mainDataUnit = "BPM";
-  String mainDataImg = "pulse.png";
-
-  String tlDataLabel = "Vitesse";
-  String tlDataValue = "175";
-  String tlDataUnit = "KM/H";
-  String tlDataImg = "pulse.png";
-
-  String trDataLabel = "Distance";
-  String trDataValue = "4.07";
-  String trDataUnit = "KM";
-  String trDataImg = "pulse.png";
-
-  String blDataLabel = "Puissance";
-  String blDataValue = "120";
-  String blDataUnit = "WATTS";
-  String blDataImg = "pulse.png";
-
-  String brDataLabel = "Cadence";
-  String brDataValue = "75";
-  String brDataUnit = "RPM";
-  String brDataImg = "pulse.png";
 
   Stream<int> stopWatchStream() {
     StreamController<int> streamController;
@@ -122,6 +122,69 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
 
   @override
   Widget build(BuildContext context) {
+    switch (_dataMap[0]) {
+      case "BPM":
+        {
+          mainDataLabel = "Fréquence Cardiaque";
+          mainDataValue = "175";
+          mainDataUnit = "BPM";
+          mainDataImg = "pulse.png";
+        }
+        break;
+      case "KMH":
+        {
+          mainDataLabel = "Vitesse";
+          mainDataValue = "25";
+          mainDataUnit = "KM/H";
+          mainDataImg = "speedometer.png";
+        }
+        break;
+      case "KM":
+        {
+          mainDataLabel = "Distance";
+          mainDataValue = "4.07";
+          mainDataUnit = "KM";
+          mainDataImg = "distance.png";
+        }
+        break;
+      case "WATTS":
+        {
+          mainDataLabel = "Puissance";
+          mainDataValue = "120";
+          mainDataUnit = "WATTS";
+          mainDataImg = "thunderbolt.png";
+        }
+        break;
+      case "RPM":
+        {
+          mainDataLabel = "Cadence";
+          mainDataValue = "75";
+          mainDataUnit = "RPM";
+          mainDataImg = "pedal.png";
+        }
+        break;
+    }
+
+    String tlDataLabel = "Vitesse";
+    String tlDataValue = "175";
+    String tlDataUnit = "KM/H";
+    String tlDataImg = "pulse.png";
+
+    String trDataLabel = "Distance";
+    String trDataValue = "4.07";
+    String trDataUnit = "KM";
+    String trDataImg = "pulse.png";
+
+    String blDataLabel = "Puissance";
+    String blDataValue = "120";
+    String blDataUnit = "WATTS";
+    String blDataImg = "pulse.png";
+
+    String brDataLabel = "Cadence";
+    String brDataValue = "75";
+    String brDataUnit = "RPM";
+    String brDataImg = "pulse.png";
+
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
 
@@ -311,6 +374,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   setState(() {
                     _dataMap = ["BPM", "KM/H", "KM", "WATTS", "RPM"];
                     prefs.setStringList('dataMap', _dataMap);
+                    Navigator.pop(context);
                   });
                 },
               ),
@@ -333,6 +397,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   setState(() {
                     _dataMap = ["KMH", "BPM", "KM", "WATTS", "RPM"];
                     prefs.setStringList('dataMap', _dataMap);
+                    Navigator.pop(context);
                   });
                 },
               ),
@@ -355,6 +420,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   setState(() {
                     _dataMap = ["KM", "BPM", "KMH", "WATTS", "RPM"];
                     prefs.setStringList('dataMap', _dataMap);
+                    Navigator.pop(context);
                   });
                 },
               ),
@@ -377,6 +443,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   setState(() {
                     _dataMap = ["WATTS", "KM/H", "KM", "BPM", "RPM"];
                     prefs.setStringList('dataMap', _dataMap);
+                    Navigator.pop(context);
                   });
                 },
               ),
@@ -399,6 +466,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   setState(() {
                     _dataMap = ["RPM", "BPM", "KM", "WATTS", "KMH"];
                     prefs.setStringList('dataMap', _dataMap);
+                    Navigator.pop(context);
                   });
                 },
               ),
