@@ -45,22 +45,18 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
   String tlDataLabel;
   String tlDataValue;
   String tlDataUnit;
-  String tlDataImg;
 
   String trDataLabel;
   String trDataValue;
   String trDataUnit;
-  String trDataImg;
 
   String blDataLabel;
   String blDataValue;
   String blDataUnit;
-  String blDataImg;
 
   String brDataLabel;
   String brDataValue;
   String brDataUnit;
-  String brDataImg;
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool flag = true;
@@ -163,27 +159,188 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
           mainDataImg = "pedal.png";
         }
         break;
+      default:
+        {
+          mainDataLabel = "Fréquence Cardiaque";
+          mainDataValue = "175";
+          mainDataUnit = "BPM";
+          mainDataImg = "pulse.png";
+        }
     }
 
-    String tlDataLabel = "Vitesse";
-    String tlDataValue = "175";
-    String tlDataUnit = "KM/H";
-    String tlDataImg = "pulse.png";
+    switch (_dataMap[1]) {
+      case "BPM":
+        {
+          tlDataLabel = "Fréquence";
+          tlDataValue = "175";
+          tlDataUnit = "BPM";
+        }
+        break;
+      case "KMH":
+        {
+          tlDataLabel = "Vitesse";
+          tlDataValue = "25";
+          tlDataUnit = "KM/H";
+        }
+        break;
+      case "KM":
+        {
+          tlDataLabel = "Distance";
+          tlDataValue = "4.07";
+          tlDataUnit = "KM";
+        }
+        break;
+      case "WATTS":
+        {
+          tlDataLabel = "Puissance";
+          tlDataValue = "120";
+          tlDataUnit = "WATTS";
+        }
+        break;
+      case "RPM":
+        {
+          tlDataLabel = "Cadence";
+          tlDataValue = "75";
+          tlDataUnit = "RPM";
+        }
+        break;
+      default:
+        {
+          tlDataLabel = "Vitesse";
+          tlDataValue = "25";
+          tlDataUnit = "KM/H";
+        }
+    }
+    switch (_dataMap[2]) {
+      case "BPM":
+        {
+          trDataLabel = "Fréquence";
+          trDataValue = "175";
+          trDataUnit = "BPM";
+        }
+        break;
+      case "KMH":
+        {
+          trDataLabel = "Vitesse";
+          trDataValue = "25";
+          trDataUnit = "KM/H";
+        }
+        break;
+      case "KM":
+        {
+          trDataLabel = "Distance";
+          trDataValue = "4.07";
+          trDataUnit = "KM";
+        }
+        break;
+      case "WATTS":
+        {
+          trDataLabel = "Puissance";
+          trDataValue = "120";
+          trDataUnit = "WATTS";
+        }
+        break;
+      case "RPM":
+        {
+          trDataLabel = "Cadence";
+          trDataValue = "75";
+          trDataUnit = "RPM";
+        }
+        break;
+      default:
+        {
+          trDataLabel = "Distance";
+          trDataValue = "4.07";
+          trDataUnit = "KM";
+        }
+    }
+    switch (_dataMap[3]) {
+      case "BPM":
+        {
+          blDataLabel = "Fréquence";
+          blDataValue = "175";
+          blDataUnit = "BPM";
+        }
+        break;
+      case "KMH":
+        {
+          blDataLabel = "Vitesse";
+          blDataValue = "25";
+          blDataUnit = "KM/H";
+        }
+        break;
+      case "KM":
+        {
+          blDataLabel = "Distance";
+          blDataValue = "4.07";
+          blDataUnit = "KM";
+        }
+        break;
+      case "WATTS":
+        {
+          blDataLabel = "Puissance";
+          blDataValue = "120";
+          blDataUnit = "WATTS";
+        }
+        break;
+      case "RPM":
+        {
+          blDataLabel = "Cadence";
+          blDataValue = "75";
+          blDataUnit = "RPM";
+        }
+        break;
+      default:
+        {
+          blDataLabel = "Puissance";
+          blDataValue = "120";
+          blDataUnit = "WATTS";
+        }
+    }
 
-    String trDataLabel = "Distance";
-    String trDataValue = "4.07";
-    String trDataUnit = "KM";
-    String trDataImg = "pulse.png";
-
-    String blDataLabel = "Puissance";
-    String blDataValue = "120";
-    String blDataUnit = "WATTS";
-    String blDataImg = "pulse.png";
-
-    String brDataLabel = "Cadence";
-    String brDataValue = "75";
-    String brDataUnit = "RPM";
-    String brDataImg = "pulse.png";
+    switch (_dataMap[4]) {
+      case "BPM":
+        {
+          brDataLabel = "Fréquence";
+          brDataValue = "175";
+          brDataUnit = "BPM";
+        }
+        break;
+      case "KMH":
+        {
+          brDataLabel = "Vitesse";
+          brDataValue = "25";
+          brDataUnit = "KM/H";
+        }
+        break;
+      case "KM":
+        {
+          brDataLabel = "Distance";
+          brDataValue = "4.07";
+          brDataUnit = "KM";
+        }
+        break;
+      case "WATTS":
+        {
+          brDataLabel = "Puissance";
+          brDataValue = "120";
+          brDataUnit = "WATTS";
+        }
+        break;
+      case "RPM":
+        {
+          brDataLabel = "Cadence";
+          brDataValue = "75";
+          brDataUnit = "RPM";
+        }
+        break;
+      default:
+        {
+          brDataLabel = "Cadence";
+          brDataValue = "75";
+          brDataUnit = "RPM";
+        }
+    }
 
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
