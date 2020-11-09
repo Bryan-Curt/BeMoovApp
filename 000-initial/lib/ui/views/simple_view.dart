@@ -30,6 +30,8 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   String rightDataUnit = "KM/H";
   String rightDataImg = "pulse.png";
 
+  var donnees = List();
+
   String mode = "simple";
 
   Stream<int> stopWatchStream() {
@@ -71,6 +73,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
 
   void initStopWatch() {
     timerStream = stopWatchStream();
+    mode = "simple";
     timerSubscription = timerStream.listen((int newTick) {
       if (mounted)
         setState(() {
@@ -80,6 +83,14 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
           secondsStr = (newTick % 60).floor().toString().padLeft(2, '0');
         });
     });
+  }
+
+  void pause() {
+    print("PAUSE");
+    donnees[0] = mode;
+    donnees[1] = hoursStr;
+    donnees[2] = minutesStr;
+    donnees[3] = secondsStr;
   }
 
   @override
@@ -176,14 +187,15 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
           horizontal: screenWidth * 0.169, vertical: screenHeight * 0.030),
       child: FlatButton(
         color: Colors.red,
-        onPressed: () async {
+        onPressed: () {
+          pause();
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => InitPauseView(),
                   // Pass the arguments as part of the RouteSettings. The
                   // DetailScreen reads the arguments from these settings.
-                  settings: RouteSettings(arguments: mode)));
+                  settings: RouteSettings(arguments: donnees)));
         },
         child: Text(
           "PAUSE",

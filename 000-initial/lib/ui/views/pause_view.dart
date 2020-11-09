@@ -44,8 +44,9 @@ class PauseView extends State<InitPauseView> {
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
-    final String mode = ModalRoute.of(context).settings.arguments;
-
+    final List<String> donnees = ModalRoute.of(context).settings.arguments;
+    String mode = donnees[0];
+    print('mode');
     Widget bandeauPause = Container(
       //padding: EdgeInsets.only(right: screenWidth * 0.3),
       child: Container(
