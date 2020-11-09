@@ -28,7 +28,7 @@ class PauseView extends State<InitPauseView> {
   String fourthDataValue = "130";
   String fourthDataUnit = "WATTS";
 
-  String fifthDataLabel = "RYTHME CARDIAQUE MOYEN";
+  String fifthDataLabel = "BPM MOYENS";
   String fifthDataValue = "140";
   String fifthDataUnit = "BPM";
 
@@ -46,7 +46,7 @@ class PauseView extends State<InitPauseView> {
       child: Container(
         color: Colors.red,
         width: screenWidth,
-        height: screenHeight * 0.1,
+        height: screenHeight * 0.08,
         child: Text(
           "EN PAUSE",
           textAlign: TextAlign.center,
@@ -56,7 +56,10 @@ class PauseView extends State<InitPauseView> {
     );
 
     Widget title = Container(
-      //padding: EdgeInsets.only(left: 20),
+      padding: EdgeInsets.only(
+          top: screenHeight * 0.08,
+          left: screenHeight * 0.03,
+          right: screenHeight * 0.03),
       child: Text('VOS PERFORMANCES EN COURS',
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -64,91 +67,123 @@ class PauseView extends State<InitPauseView> {
     );
 
     Widget firstData = Container(
-        //padding: EdgeInsets.only(left: 20),
         child: Row(
       // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(firstDataLabel,
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            style: TextStyle(
+                fontSize: screenHeight * 0.03, fontWeight: FontWeight.bold)),
         Text(' : ',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(firstDataValue, style: TextStyle(fontSize: 25)),
-        Text(firstDataUnit, style: TextStyle(fontSize: 25)),
+            style: TextStyle(
+                fontSize: screenHeight * 0.03, fontWeight: FontWeight.bold)),
+        Text(firstDataValue, style: TextStyle(fontSize: screenHeight * 0.03)),
+        Text(firstDataUnit, style: TextStyle(fontSize: screenHeight * 0.03)),
       ],
     ));
 
     Widget secondData = Container(
-        //padding: EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(top: screenHeight * 0.025),
         child: Row(
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(secondDataLabel,
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(' : ',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(secondDataValue, style: TextStyle(fontSize: 25)),
-        Text(secondDataUnit, style: TextStyle(fontSize: 25)),
-      ],
-    ));
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(secondDataLabel,
+                style: TextStyle(
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold)),
+            Text(' : ',
+                style: TextStyle(
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold)),
+            Text(secondDataValue,
+                style: TextStyle(fontSize: screenHeight * 0.03)),
+            Text(secondDataUnit,
+                style: TextStyle(fontSize: screenHeight * 0.03)),
+          ],
+        ));
 
     Widget thirdData = Container(
-        //padding: EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(top: screenHeight * 0.025),
         child: Row(
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(thirdDataLabel,
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(' : ',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(thirdDataValue, style: TextStyle(fontSize: 25)),
-        Text(thirdDataUnit, style: TextStyle(fontSize: 25)),
-      ],
-    ));
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(thirdDataLabel,
+                style: TextStyle(
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold)),
+            Text(' : ',
+                style: TextStyle(
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold)),
+            Text(thirdDataValue,
+                style: TextStyle(fontSize: screenHeight * 0.03)),
+            Text(thirdDataUnit,
+                style: TextStyle(fontSize: screenHeight * 0.03)),
+          ],
+        ));
 
     Widget fourthData = Container(
-        //padding: EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(top: screenHeight * 0.025),
         child: Row(
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(fourthDataLabel,
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(' : ',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(fourthDataValue, style: TextStyle(fontSize: 25)),
-        Text(fourthDataUnit, style: TextStyle(fontSize: 25)),
-      ],
-    ));
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(fourthDataLabel,
+                style: TextStyle(
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold)),
+            Text(' : ',
+                style: TextStyle(
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold)),
+            Text(fourthDataValue,
+                style: TextStyle(fontSize: screenHeight * 0.03)),
+            Text(fourthDataUnit,
+                style: TextStyle(fontSize: screenHeight * 0.03)),
+          ],
+        ));
 
     Widget fifthData = Container(
-        //padding: EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(top: screenHeight * 0.025),
         child: Row(
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(fifthDataLabel,
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(' : ',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(fifthDataValue, style: TextStyle(fontSize: 25)),
-        Text(fifthDataUnit, style: TextStyle(fontSize: 25)),
-      ],
-    ));
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(fifthDataLabel,
+                style: TextStyle(
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold)),
+            Text(' : ',
+                style: TextStyle(
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold)),
+            Text(fifthDataValue,
+                style: TextStyle(fontSize: screenHeight * 0.03)),
+            Text(fifthDataUnit,
+                style: TextStyle(fontSize: screenHeight * 0.03)),
+          ],
+        ));
 
     Widget sixthData = Container(
-        //padding: EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(top: screenHeight * 0.025),
         child: Row(
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(sixthDataLabel,
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(' : ',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-        Text(sixthDataValue, style: TextStyle(fontSize: 25)),
-        Text(sixthDataUnit, style: TextStyle(fontSize: 25)),
-      ],
-    ));
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(sixthDataLabel,
+                style: TextStyle(
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold)),
+            Text(' : ',
+                style: TextStyle(
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold)),
+            Text(sixthDataValue,
+                style: TextStyle(fontSize: screenHeight * 0.03)),
+            Text(sixthDataUnit,
+                style: TextStyle(fontSize: screenHeight * 0.03)),
+          ],
+        ));
 
     Widget datas = Container(
-        padding: EdgeInsets.only(top: screenHeight * 0.01),
+        padding:
+            EdgeInsets.only(top: screenHeight * 0.1, left: screenHeight * 0.01),
         child: Column(children: [
           Row(
             //mainAxisAlignment: MainAxisAlignment.center,
@@ -172,10 +207,9 @@ class PauseView extends State<InitPauseView> {
         ]));
 
     Widget reprendrebutton = Container(
-      // padding: EdgeInsets.symmetric(
-      //    horizontal: screenWidth * 0.169, vertical: screenHeight * 0.030),
       width: screenWidth * 0.45,
       height: screenHeight * 0.09,
+      //padding: EdgeInsets.only(top: screenHeight * 0.08),
       child: FlatButton(
         color: Colors.white,
         onPressed: () async {
@@ -194,10 +228,9 @@ class PauseView extends State<InitPauseView> {
     );
 
     Widget finbutton = Container(
-      // padding: EdgeInsets.symmetric(
-      //    horizontal: screenWidth * 0.169, vertical: screenHeight * 0.030),
       width: screenWidth * 0.45,
       height: screenHeight * 0.09,
+      margin: EdgeInsets.only(left: screenHeight * 0.03),
       child: FlatButton(
         color: Colors.white,
         onPressed: () async {
@@ -207,7 +240,6 @@ class PauseView extends State<InitPauseView> {
           "ARRÊTER",
           style: TextStyle(color: Colors.red, fontSize: 25),
         ),
-        //padding: EdgeInsets.all(screenHeight * 0.022),
         shape: RoundedRectangleBorder(
             side: BorderSide(
                 color: Colors.red, width: 2, style: BorderStyle.solid),
@@ -216,14 +248,13 @@ class PauseView extends State<InitPauseView> {
     );
 
     Widget boutons = Container(
-        //padding: EdgeInsets.only(top: screenHeight * 0.01),
-
+        padding: EdgeInsets.only(top: screenHeight * 0.05),
         child: Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [reprendrebutton, finbutton],
-      )
-    ]));
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [reprendrebutton, finbutton],
+          )
+        ]));
 
     return Provider<MyMode>(
       create: (context) => MyMode(),
