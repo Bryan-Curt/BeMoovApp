@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/user.dart';
+import 'package:provider_architecture/ui/views/simple_view.dart';
 import 'package:responsive_screen/responsive_screen.dart';
 
 class InitPauseView extends StatefulWidget {
@@ -36,10 +37,14 @@ class PauseView extends State<InitPauseView> {
   String sixthDataValue = "88";
   String sixthDataUnit = "RPM";
 
+  //Test test;
+  //PauseView({Key key, @required this.test});
+
   @override
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
+    final String mode = ModalRoute.of(context).settings.arguments;
 
     Widget bandeauPause = Container(
       //padding: EdgeInsets.only(right: screenWidth * 0.3),
@@ -213,7 +218,11 @@ class PauseView extends State<InitPauseView> {
       child: FlatButton(
         color: Colors.white,
         onPressed: () async {
-          Navigator.pushNamed(context, 'pause');
+          if (mode == 'simple') {
+            Navigator.pushNamed(context, 'simple');
+          } else if (mode == 'sportif') {
+            Navigator.pushNamed(context, 'sportif');
+          }
         },
         child: Text(
           "REPRENDRE",

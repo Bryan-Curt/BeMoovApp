@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/user.dart';
+import 'package:provider_architecture/ui/views/pause_view.dart';
 import 'package:responsive_screen/responsive_screen.dart';
 
 class InitSimpleMonitoring extends StatefulWidget {
@@ -28,6 +29,8 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   String rightDataValue = "175";
   String rightDataUnit = "KM/H";
   String rightDataImg = "pulse.png";
+
+  String mode = "simple";
 
   Stream<int> stopWatchStream() {
     StreamController<int> streamController;
@@ -83,6 +86,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
+    //test = 'simple';
     if (secondsStr == '00' && minutesStr == '00') {
       initStopWatch();
     }
@@ -92,7 +96,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("TEMPS",
+          Text('TEMPS',
               style: TextStyle(
                 fontSize: screenHeight * 0.025,
               )),
@@ -173,7 +177,13 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
       child: FlatButton(
         color: Colors.red,
         onPressed: () async {
-          Navigator.pushNamed(context, 'pause');
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => InitPauseView(),
+                  // Pass the arguments as part of the RouteSettings. The
+                  // DetailScreen reads the arguments from these settings.
+                  settings: RouteSettings(arguments: mode)));
         },
         child: Text(
           "PAUSE",
