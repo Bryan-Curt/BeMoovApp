@@ -32,19 +32,29 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
 
   String mode = "simple";
 
-  var donnees = List(4);
+  var donnees = List(5);
+
+  var donneesTest = List(5);
+  int counter;
 
   Stream<int> stopWatchStream() {
     StreamController<int> streamController;
     Timer timer;
     Duration timerInterval = Duration(seconds: 1);
-    int counter = 0;
+
+    if (donneesTest != null) {
+      if (donneesTest[4] != null) {
+        counter = donneesTest[4];
+      }
+    } else {
+      counter = 0;
+    }
 
     void stopTimer() {
       if (timer != null) {
         timer.cancel();
         timer = null;
-        counter = 0;
+
         streamController.close();
       }
     }
@@ -86,19 +96,22 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   }
 
   void pause() {
-    print(minutesStr);
+    //print(minutesStr);
     donnees[0] = mode;
     donnees[1] = hoursStr;
     donnees[2] = minutesStr;
     donnees[3] = secondsStr;
+    donnees[4] = counter;
   }
 
   @override
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
-    //test = 'simple';
+    donneesTest = ModalRoute.of(context).settings.arguments;
+    //
     if (secondsStr == '00' && minutesStr == '00') {
+      // print(donneesTest[4]);
       initStopWatch();
     }
 

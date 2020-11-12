@@ -18,8 +18,6 @@ class PauseView extends State<InitPauseView> {
   String firstDataUnit = "KM";
 
   String secondDataLabel = "TEMPS";
-  String secondDataValue = "00 H 30 M 00 S";
-  String secondDataUnit = "";
 
   String thirdDataLabel = "VITESSE MOYENNE";
   String thirdDataValue = "15";
@@ -54,6 +52,7 @@ class PauseView extends State<InitPauseView> {
     // print(hoursStr);
     // print(minutesStr);
     // print(secondsStr);
+    //print(donnees[4]);
 
     Widget bandeauPause = Container(
       //padding: EdgeInsets.only(right: screenWidth * 0.3),
@@ -225,7 +224,13 @@ class PauseView extends State<InitPauseView> {
         color: Colors.white,
         onPressed: () async {
           if (mode == 'simple') {
-            Navigator.pushNamed(context, 'simple');
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => InitSimpleMonitoring(),
+                    // Pass the arguments as part of the RouteSettings. The
+                    // DetailScreen reads the arguments from these settings.
+                    settings: RouteSettings(arguments: donnees)));
           } else if (mode == 'sportif') {
             Navigator.pushNamed(context, 'sportif');
           }
