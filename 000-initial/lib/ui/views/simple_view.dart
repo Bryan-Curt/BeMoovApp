@@ -16,8 +16,8 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   bool flag = true;
   Stream<int> timerStream;
   StreamSubscription<int> timerSubscription;
-  String hoursStr;
 
+  String hoursStr;
   String minutesStr;
   String secondsStr;
 
@@ -34,8 +34,8 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   String mode = "simple";
 
   var donnees = List(5);
+  var donneesPause = List(5);
 
-  var donneesTest = List(5);
   int counter;
   bool firstgo = true;
 
@@ -44,12 +44,12 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
     Timer timer;
     Duration timerInterval = Duration(seconds: 1);
 
-    if (donneesTest != null) {
-      if (donneesTest[4] != null) {
-        counter = donneesTest[4];
-        hoursStr = donneesTest[1];
-        minutesStr = donneesTest[2];
-        secondsStr = donneesTest[3];
+    if (donneesPause != null) {
+      if (donneesPause[4] != null) {
+        counter = donneesPause[4];
+        hoursStr = donneesPause[1];
+        minutesStr = donneesPause[2];
+        secondsStr = donneesPause[3];
       }
     } else {
       counter = 0;
@@ -118,7 +118,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
-    donneesTest = ModalRoute.of(context).settings.arguments;
+    donneesPause = ModalRoute.of(context).settings.arguments;
 
     if (firstgo) {
       initStopWatch();

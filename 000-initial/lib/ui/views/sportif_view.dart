@@ -7,6 +7,7 @@ import 'package:provider_architecture/core/models/mainDisplayed.dart';
 import 'package:provider_architecture/core/models/user.dart';
 import 'package:responsive_screen/responsive_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider_architecture/ui/views/pause_view.dart';
 
 class InitSportifMonitoring extends StatefulWidget {
   @override
@@ -72,15 +73,37 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
   bool flag = true;
   Stream<int> timerStream;
   StreamSubscription<int> timerSubscription;
-  String hoursStr = '00';
-  String minutesStr = '00';
-  String secondsStr = '00';
+  String hoursStr;
+  String minutesStr;
+  String secondsStr;
+
+  var donnees = List(5);
+  var donneesPause = List(5);
+  int counter;
+  bool firstgo = true;
+
+  String mode = "sportif";
 
   Stream<int> stopWatchStream() {
     StreamController<int> streamController;
     Timer timer;
     Duration timerInterval = Duration(seconds: 1);
-    int counter = 0;
+    if (donneesPause != null) {
+      if (donneesPause[4] != null) {
+        counter = donneesPause[4];
+        hoursStr = donneesPause[1];
+        minutesStr = donneesPause[2];
+        secondsStr = donneesPause[3];
+      }
+    } else {
+      counter = 0;
+    }
+
+    if (counter == 0) {
+      hoursStr = '00';
+      minutesStr = '00';
+      secondsStr = '00';
+    }
 
     void stopTimer() {
       if (timer != null) {
@@ -114,7 +137,9 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
   }
 
   void initStopWatch() {
+    firstgo = false;
     timerStream = stopWatchStream();
+    mode = "sportif";
     timerSubscription = timerStream.listen((int newTick) {
       if (mounted)
         setState(() {
@@ -126,10 +151,19 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
     });
   }
 
+  void pause() {
+    donnees[0] = mode;
+    donnees[1] = hoursStr;
+    donnees[2] = minutesStr;
+    donnees[3] = secondsStr;
+    donnees[4] = counter;
+  }
+
   @override
   Widget build(BuildContext context) {
     var colorAssistance;
     var colorSportifButton;
+
     if (_isSportif) {
       colorAssistance = Colors.grey;
       colorSportifButton = Colors.orange;
@@ -364,7 +398,9 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
 
-    if (secondsStr == '00' && minutesStr == '00') {
+    donneesPause = ModalRoute.of(context).settings.arguments;
+
+    if (firstgo) {
       initStopWatch();
     }
 
@@ -385,6 +421,10 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
           padding: EdgeInsets.all(15.0),
           shape: CircleBorder(),
         ));
+
+    if (firstgo) {
+      initStopWatch();
+    }
 
     Widget stopwatchsection = Container(
       //padding: EdgeInsets.only(top: 0, bottom: 0),
@@ -410,7 +450,16 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
           horizontal: screenWidth * 0.17, vertical: screenHeight * 0.02),
       child: FlatButton(
         color: Colors.red,
-        onPressed: () async {},
+        onPressed: () {
+          pause();
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => InitPauseView(),
+                  // Pass the arguments as part of the RouteSettings. The
+                  // DetailScreen reads the arguments from these settings.
+                  settings: RouteSettings(arguments: donnees)));
+        },
         child: Text(
           "PAUSE",
           style: TextStyle(color: Colors.white, fontSize: screenHeight * 0.06),

@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/user.dart';
 import 'package:provider_architecture/ui/views/simple_view.dart';
+import 'package:provider_architecture/ui/views/sportif_view.dart';
+
 import 'package:responsive_screen/responsive_screen.dart';
 
 class InitPauseView extends StatefulWidget {
@@ -40,6 +42,7 @@ class PauseView extends State<InitPauseView> {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
     final List donnees = ModalRoute.of(context).settings.arguments;
+    print(donnees);
     String mode = donnees[0];
     String hoursStr = donnees[1];
     String minutesStr = donnees[2];
@@ -206,7 +209,14 @@ class PauseView extends State<InitPauseView> {
 
                     settings: RouteSettings(arguments: donnees)));
           } else if (mode == 'sportif') {
-            Navigator.pushNamed(context, 'sportif');
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => InitSportifMonitoring(),
+                    // Pass the arguments as part of the RouteSettings. The
+                    // DetailScreen reads the arguments from these settings.
+
+                    settings: RouteSettings(arguments: donnees)));
           }
         },
         child: Text(
