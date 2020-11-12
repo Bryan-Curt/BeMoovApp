@@ -44,9 +44,17 @@ class PauseView extends State<InitPauseView> {
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
-    final List<String> donnees = ModalRoute.of(context).settings.arguments;
+    final List donnees = ModalRoute.of(context).settings.arguments;
     String mode = donnees[0];
-    print('mode');
+    String hoursStr = donnees[1];
+    String minutesStr = donnees[2];
+    String secondsStr = donnees[3];
+    var temps = hoursStr + ' H ' + minutesStr + ' M ' + secondsStr + ' S';
+    // print(mode);
+    // print(hoursStr);
+    // print(minutesStr);
+    // print(secondsStr);
+
     Widget bandeauPause = Container(
       //padding: EdgeInsets.only(right: screenWidth * 0.3),
       child: Container(
@@ -100,10 +108,7 @@ class PauseView extends State<InitPauseView> {
                 style: TextStyle(
                     fontSize: screenHeight * 0.025,
                     fontWeight: FontWeight.bold)),
-            Text(secondDataValue,
-                style: TextStyle(fontSize: screenHeight * 0.025)),
-            Text(secondDataUnit,
-                style: TextStyle(fontSize: screenHeight * 0.025)),
+            Text(temps, style: TextStyle(fontSize: screenHeight * 0.025)),
           ],
         ));
 

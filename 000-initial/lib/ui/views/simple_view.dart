@@ -30,9 +30,9 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   String rightDataUnit = "KM/H";
   String rightDataImg = "pulse.png";
 
-  var donnees = List();
-
   String mode = "simple";
+
+  var donnees = List(4);
 
   Stream<int> stopWatchStream() {
     StreamController<int> streamController;
@@ -86,7 +86,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   }
 
   void pause() {
-    print("PAUSE");
+    print(minutesStr);
     donnees[0] = mode;
     donnees[1] = hoursStr;
     donnees[2] = minutesStr;
