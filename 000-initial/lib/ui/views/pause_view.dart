@@ -35,9 +35,6 @@ class PauseView extends State<InitPauseView> {
   String sixthDataValue = "88";
   String sixthDataUnit = "RPM";
 
-  //Test test;
-  //PauseView({Key key, @required this.test});
-
   @override
   Widget build(BuildContext context) {
     dynamic screenHeight = MediaQuery.of(context).size.height;
@@ -48,14 +45,8 @@ class PauseView extends State<InitPauseView> {
     String minutesStr = donnees[2];
     String secondsStr = donnees[3];
     var temps = hoursStr + ' H ' + minutesStr + ' M ' + secondsStr + ' S';
-    // print(mode);
-    // print(hoursStr);
-    // print(minutesStr);
-    // print(secondsStr);
-    //print(donnees[4]);
 
     Widget bandeauPause = Container(
-      //padding: EdgeInsets.only(right: screenWidth * 0.3),
       child: Container(
         color: Colors.red,
         width: screenWidth,
@@ -81,7 +72,6 @@ class PauseView extends State<InitPauseView> {
 
     Widget firstData = Container(
         child: Row(
-      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(firstDataLabel,
             style: TextStyle(
@@ -97,7 +87,6 @@ class PauseView extends State<InitPauseView> {
     Widget secondData = Container(
         padding: EdgeInsets.only(top: screenHeight * 0.025),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(secondDataLabel,
                 style: TextStyle(
@@ -114,7 +103,6 @@ class PauseView extends State<InitPauseView> {
     Widget thirdData = Container(
         padding: EdgeInsets.only(top: screenHeight * 0.025),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(thirdDataLabel,
                 style: TextStyle(
@@ -134,7 +122,6 @@ class PauseView extends State<InitPauseView> {
     Widget fourthData = Container(
         padding: EdgeInsets.only(top: screenHeight * 0.025),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(fourthDataLabel,
                 style: TextStyle(
@@ -154,7 +141,6 @@ class PauseView extends State<InitPauseView> {
     Widget fifthData = Container(
         padding: EdgeInsets.only(top: screenHeight * 0.025),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(fifthDataLabel,
                 style: TextStyle(
@@ -174,7 +160,6 @@ class PauseView extends State<InitPauseView> {
     Widget sixthData = Container(
         padding: EdgeInsets.only(top: screenHeight * 0.025),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(sixthDataLabel,
                 style: TextStyle(
@@ -196,30 +181,18 @@ class PauseView extends State<InitPauseView> {
             EdgeInsets.only(top: screenHeight * 0.1, left: screenHeight * 0.01),
         child: Column(children: [
           Row(
-            //mainAxisAlignment: MainAxisAlignment.center,
             children: [firstData],
           ),
-          Row(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: [secondData]),
-          Row(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: [thirdData]),
-          Row(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: [fourthData]),
-          Row(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: [fifthData]),
-          Row(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: [sixthData])
+          Row(children: [secondData]),
+          Row(children: [thirdData]),
+          Row(children: [fourthData]),
+          Row(children: [fifthData]),
+          Row(children: [sixthData])
         ]));
 
     Widget reprendrebutton = Container(
       width: screenWidth * 0.45,
       height: screenHeight * 0.09,
-      //padding: EdgeInsets.only(top: screenHeight * 0.08),
       child: FlatButton(
         color: Colors.white,
         onPressed: () async {
@@ -230,6 +203,7 @@ class PauseView extends State<InitPauseView> {
                     builder: (context) => InitSimpleMonitoring(),
                     // Pass the arguments as part of the RouteSettings. The
                     // DetailScreen reads the arguments from these settings.
+
                     settings: RouteSettings(arguments: donnees)));
           } else if (mode == 'sportif') {
             Navigator.pushNamed(context, 'sportif');
@@ -239,7 +213,6 @@ class PauseView extends State<InitPauseView> {
           "REPRENDRE",
           style: TextStyle(color: Colors.green, fontSize: 25),
         ),
-        //padding: EdgeInsets.all(screenHeight * 0.022),
         shape: RoundedRectangleBorder(
             side: BorderSide(
                 color: Colors.green, width: 2, style: BorderStyle.solid),
@@ -280,7 +253,6 @@ class PauseView extends State<InitPauseView> {
       create: (context) => MyMode(),
       child: Scaffold(
         body: ListView(
-          //padding: EdgeInsets.symmetric(vertical: screenHeight * 0.022),
           physics: const NeverScrollableScrollPhysics(),
           children: [
             bandeauPause,

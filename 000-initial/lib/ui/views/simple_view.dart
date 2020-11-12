@@ -16,9 +16,10 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   bool flag = true;
   Stream<int> timerStream;
   StreamSubscription<int> timerSubscription;
-  String hoursStr = '00';
-  String minutesStr = '00';
-  String secondsStr = '00';
+  String hoursStr;
+
+  String minutesStr;
+  String secondsStr;
 
   String leftDataLabel = "BPM";
   String leftDataValue = "175";
@@ -36,6 +37,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
 
   var donneesTest = List(5);
   int counter;
+  bool firstgo = true;
 
   Stream<int> stopWatchStream() {
     StreamController<int> streamController;
@@ -45,16 +47,24 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
     if (donneesTest != null) {
       if (donneesTest[4] != null) {
         counter = donneesTest[4];
+        hoursStr = donneesTest[1];
+        minutesStr = donneesTest[2];
+        secondsStr = donneesTest[3];
       }
     } else {
       counter = 0;
+    }
+
+    if (counter == 0) {
+      hoursStr = '00';
+      minutesStr = '00';
+      secondsStr = '00';
     }
 
     void stopTimer() {
       if (timer != null) {
         timer.cancel();
         timer = null;
-
         streamController.close();
       }
     }
@@ -82,6 +92,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   }
 
   void initStopWatch() {
+    firstgo = false;
     timerStream = stopWatchStream();
     mode = "simple";
     timerSubscription = timerStream.listen((int newTick) {
@@ -96,7 +107,6 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   }
 
   void pause() {
-    //print(minutesStr);
     donnees[0] = mode;
     donnees[1] = hoursStr;
     donnees[2] = minutesStr;
@@ -109,9 +119,8 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
     dynamic screenHeight = MediaQuery.of(context).size.height;
     dynamic screenWidth = MediaQuery.of(context).size.width;
     donneesTest = ModalRoute.of(context).settings.arguments;
-    //
-    if (secondsStr == '00' && minutesStr == '00') {
-      // print(donneesTest[4]);
+
+    if (firstgo) {
       initStopWatch();
     }
 
@@ -167,7 +176,6 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
     Widget leftData = Container(
         padding: EdgeInsets.only(right: screenWidth * 0.3),
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(leftDataLabel, style: TextStyle(fontSize: 25)),
             Text(leftDataValue, style: TextStyle(fontSize: 40)),
@@ -176,9 +184,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
         ));
 
     Widget rightData = Container(
-        //padding: EdgeInsets.only(left: 20),
         child: Column(
-      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(rightDataLabel, style: TextStyle(fontSize: 25)),
         Text(rightDataValue, style: TextStyle(fontSize: 40)),
