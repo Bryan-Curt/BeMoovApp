@@ -1,46 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:responsive_screen/responsive_screen.dart';
-
-// class BleConnexion extends StatelessWidget {
-//   // Gestion de la future connexion bluetooth
-//   @override
-//   Widget build(BuildContext context) {
-//     dynamic screenHeight = MediaQuery.of(context).size.height;
-//     dynamic screenWidth = MediaQuery.of(context).size.width;
-//     return MaterialApp(
-//       title: 'Flutter layout demo',
-//       home: Scaffold(
-//         body: ListView(
-//           padding: EdgeInsets.symmetric(vertical: screenHeight * 0.70),
-//           children: [
-//             Text(
-//               "BLE pas encore implémenté",
-//             ),
-//           ],
-//         ),
-//         bottomNavigationBar: Container(
-//           padding: EdgeInsets.only(bottom: screenHeight * 0.112),
-//           child: FlatButton(
-//             onPressed: () async {
-//               Navigator.pushNamed(context, 'aviitamConnexionPage');
-//             },
-//             child:
-//                 Text('CONNEXION AVIITAM', style: TextStyle(color: Colors.red)),
-//             textColor: Colors.red,
-//             padding: EdgeInsets.all(screenHeight * .025),
-//             shape: RoundedRectangleBorder(
-//                 side: BorderSide(
-//                     color: Colors.red, width: 1, style: BorderStyle.solid),
-//                 borderRadius: BorderRadius.circular(25)),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 // Copyright 2017, Paul DeMarco.
 // All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
@@ -57,11 +14,11 @@ import 'package:provider_architecture/ui/views/widgets.dart';
 //   runApp(FlutterBlueApp());
 // }
 
-class BleConnexion extends StatelessWidget {
+class FlutterBlueApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      color: Colors.red,
+      color: Colors.lightBlue,
       home: StreamBuilder<BluetoothState>(
           stream: FlutterBlue.instance.state,
           initialData: BluetoothState.unknown,
@@ -84,7 +41,7 @@ class BluetoothOffScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.lightBlue,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -113,7 +70,7 @@ class FindDevicesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sélectionnez votre vélo'),
+        title: Text('Find Devices'),
       ),
       body: RefreshIndicator(
         onRefresh: () =>
