@@ -210,7 +210,7 @@ class StartView extends State<InitStartView> {
             }
 
             var databasesPath = getDbPath();
-            String path = join(databasesPath.toString(), 'data3.db');
+            String path = join(databasesPath.toString(), 'data4.db');
             void createDataBase() async {
               Database database = await openDatabase(path, version: 1,
                   onCreate: (Database db, int version) async {
@@ -218,7 +218,7 @@ class StartView extends State<InitStartView> {
                 await db.execute(
                     'CREATE TABLE DataSortie (id INTEGER PRIMARY KEY, date TEXT)');
                 await db.execute(
-                    'CREATE TABLE DataMoy (id INTEGER PRIMARY KEY, speed INTEGER, power INTEGER, heartbeat INTEGER, cadency INTEGER, idSortie INTEGER, FOREIGN KEY(idSortie) REFERENCES DataSortie(id))');
+                    'CREATE TABLE DataMoy (id INTEGER PRIMARY KEY, speed INTEGER, power INTEGER, heartbeat INTEGER, cadency INTEGER, time INTEGER, idSortie INTEGER, FOREIGN KEY(idSortie) REFERENCES DataSortie(id))');
               });
 
               await database.transaction((txn) async {

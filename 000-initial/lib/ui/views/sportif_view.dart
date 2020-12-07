@@ -169,15 +169,20 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
     }
 
     var databasesPath = getDbPath();
-    String path = join(databasesPath.toString(), 'data3.db');
+    String path = join(databasesPath.toString(), 'data4.db');
     print(path);
     void createDataBase() async {
       Database database = await openDatabase(path,
           version: 1, onCreate: (Database db, int version) async {});
 
       await database.transaction((txn) async {
+        int t = (int.parse(hoursStr) * 3600).round() +
+            (int.parse(minutesStr) * 60).round() +
+            int.parse(secondsStr);
         await txn.rawInsert(
-            'INSERT INTO DataMoy(speed,power,heartbeat,cadency, idSortie) VALUES (14,110,130,75,(SELECT max(id) FROM DataSortie))');
+            'INSERT INTO DataMoy(speed,power,heartbeat,cadency, time, idSortie) VALUES (14,110,130,75,' +
+                t.toString() +
+                ',(SELECT max(id) FROM DataSortie))');
         //print('inserted1: $id1');
       });
 
