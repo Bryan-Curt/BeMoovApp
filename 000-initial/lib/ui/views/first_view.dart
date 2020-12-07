@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_screen/responsive_screen.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'package:intl/intl.dart';
 //Première vue de l'application, correspond à la première page, une page servant d'affichage, de temporisation avant de rediriger vers les connexions ble et aviitam
 
 class FirstView extends StatelessWidget {

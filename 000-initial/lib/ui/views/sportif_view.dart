@@ -8,6 +8,8 @@ import 'package:provider_architecture/core/models/user.dart';
 import 'package:responsive_screen/responsive_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider_architecture/ui/views/pause_view.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
 class InitSportifMonitoring extends StatefulWidget {
   @override
@@ -161,6 +163,31 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
 
   @override
   Widget build(BuildContext context) {
+    Future<String> getDbPath() async {
+      String pathDb = await getDatabasesPath();
+      return pathDb;
+    }
+
+    var databasesPath = getDbPath();
+    String path = join(databasesPath.toString(), 'data3.db');
+    print(path);
+    void createDataBase() async {
+      Database database = await openDatabase(path,
+          version: 1, onCreate: (Database db, int version) async {});
+
+      await database.transaction((txn) async {
+        await txn.rawInsert(
+            'INSERT INTO DataMoy(speed,power,heartbeat,cadency, idSortie) VALUES (14,110,130,75,(SELECT max(id) FROM DataSortie))');
+        //print('inserted1: $id1');
+      });
+
+      List<Map> list = await database.rawQuery(
+          'SELECT * FROM DataMoy WHERE id=(SELECT max(id) FROM DataMoy)');
+      print(list);
+    }
+
+    createDataBase();
+
     var colorAssistance;
     var colorSportifButton;
 

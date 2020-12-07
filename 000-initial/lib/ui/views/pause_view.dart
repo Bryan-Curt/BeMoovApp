@@ -237,7 +237,7 @@ class PauseView extends State<InitPauseView> {
       child: FlatButton(
         color: Colors.white,
         onPressed: () async {
-          Navigator.pushNamed(context, 'pause');
+          Navigator.pushNamed(context, 'bd');
         },
         child: Text(
           "ARRÊTER",
