@@ -82,7 +82,7 @@ class StartView extends State<InitStartView> {
                           ),
                           FlatButton(
                             onPressed: () {
-                              /*...*/
+                              Navigator.pushNamed(context, 'pastTraining');
                             },
                             child: Text(
                               "Voir vos précédents entraînements",
