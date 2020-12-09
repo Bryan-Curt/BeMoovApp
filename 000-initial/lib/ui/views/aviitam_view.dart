@@ -1,7 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:responsive_screen/responsive_screen.dart';
 
 class AviitamConnexion extends StatelessWidget {
+  const AviitamConnexion({Key key, this.device}) : super(key: key);
+
+  final BluetoothDevice device;
+
   //gestion de la future connexion a aviitam
   @override
   Widget build(BuildContext context) {
@@ -23,6 +30,7 @@ class AviitamConnexion extends StatelessWidget {
           child: FlatButton(
             onPressed: () async {
               Navigator.pushNamed(context, 'startPage');
+              //recuperationJSON();
             },
             child: Text('ECRAN DEPART', style: TextStyle(color: Colors.red)),
             textColor: Colors.red,

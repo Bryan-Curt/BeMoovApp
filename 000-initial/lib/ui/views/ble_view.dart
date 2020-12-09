@@ -41,17 +41,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// Copyright 2017, Paul DeMarco.
-// All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
+//Copyright 2017, Paul DeMarco.
+//All rights reserved. Use of this source code is governed by a
+//BSD-style license that can be found in the LICENSE file.
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider_architecture/ui/views/widgets.dart';
+
+import 'aviitam_view.dart';
 
 // void main() {
 //   runApp(FlutterBlueApp());
@@ -138,10 +141,11 @@ class FindDevicesScreen extends StatelessWidget {
                                     BluetoothDeviceState.connected) {
                                   return RaisedButton(
                                     child: Text('OPEN'),
-                                    onPressed: () => Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                DeviceScreen(device: d))),
+                                    onPressed: () => Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          DeviceScreen(device: d),
+                                    )),
                                   );
                                 }
                                 return Text(snapshot.data.toString());
@@ -208,6 +212,37 @@ class DeviceScreen extends StatelessWidget {
       math.nextInt(255),
       math.nextInt(255)
     ];
+  }
+
+  recuperationJSON() {
+    print("RECUP JSON");
+    Stream<List<int>> listStream;
+    String serviceOui = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+    String charOui = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
+
+    List<BluetoothService> services =
+        device.discoverServices() as List<BluetoothService>;
+    //checking each services provided by device
+    services.forEach((service) {
+      if (service.uuid.toString() == serviceOui) {
+        service.characteristics.forEach((characteristic) {
+          if (characteristic.uuid.toString() == charOui) {
+            //Updating stream to perform read operation.
+            listStream = characteristic.value;
+          }
+        });
+      }
+    });
+
+    StreamBuilder<List<int>>(
+      stream: listStream, //here we're using our char's value
+      initialData: [],
+      builder: (c, snapshot) {
+        final value = snapshot.data;
+        String receivedStr = ascii.decode(value);
+        print("receivedStr: " + receivedStr);
+      },
+    );
   }
 
   List<Widget> _buildServiceTiles(List<BluetoothService> services) {
@@ -349,3 +384,223 @@ class DeviceScreen extends StatelessWidget {
     );
   }
 }
+
+class RecupJSON {
+  RecupJSON(BluetoothDevice device) : device = device;
+  final BluetoothDevice device;
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------------
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter_blue/flutter_blue.dart';
+
+// class BleConnexion extends StatefulWidget {
+//   BleConnexion({Key key, this.title}) : super(key: key);
+//   final FlutterBlue flutterBlue = FlutterBlue.instance;
+//   final String title;
+//   final List<BluetoothDevice> devicesList = new List<BluetoothDevice>();
+
+//   @override
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
+
+// class _MyHomePageState extends State<BleConnexion> {
+//   BluetoothDevice _connectedDevice;
+//   List<BluetoothService> _services = new List<BluetoothService>();
+
+//   _addDeviceTolist(final BluetoothDevice device) {
+//     if (!widget.devicesList.contains(device)) {
+//       setState(() {
+//         widget.devicesList.add(device);
+//       });
+//     }
+//   }
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     widget.flutterBlue.connectedDevices
+//         .asStream()
+//         .listen((List<BluetoothDevice> devices) {
+//       for (BluetoothDevice device in devices) {
+//         _addDeviceTolist(device);
+//       }
+//     });
+//     widget.flutterBlue.scanResults.listen((List<ScanResult> results) {
+//       for (ScanResult result in results) {
+//         _addDeviceTolist(result.device);
+//       }
+//     });
+//     widget.flutterBlue.startScan();
+//   }
+
+//   ListView _buildListViewOfDevices() {
+//     List<Container> containers = new List<Container>();
+//     for (BluetoothDevice device in widget.devicesList) {
+//       containers.add(
+//         Container(
+//           height: 50,
+//           child: Row(
+//             children: <Widget>[
+//               Expanded(
+//                 child: Column(
+//                   children: <Widget>[
+//                     Text(device.name == '' ? '(unknown device)' : device.name),
+//                     Text(device.id.toString()),
+//                   ],
+//                 ),
+//               ),
+//               FlatButton(
+//                 color: Colors.blue,
+//                 child: Text(
+//                   'Connect',
+//                   style: TextStyle(color: Colors.white),
+//                 ),
+//                 onPressed: () {
+//                   setState(() async {
+//                     widget.flutterBlue.stopScan();
+//                     try {
+//                       await device.connect();
+//                     } catch (e) {
+//                       if (e.code != 'already_connected') {
+//                         throw e;
+//                       }
+//                     } finally {
+//                       _services = await device.discoverServices();
+//                     }
+//                     _connectedDevice = device;
+//                   });
+//                 },
+//               ),
+//             ],
+//           ),
+//         ),
+//       );
+//     }
+
+//     return ListView(
+//       padding: const EdgeInsets.all(8),
+//       children: <Widget>[
+//         ...containers,
+//       ],
+//     );
+//   }
+
+//   ListView _buildView() {
+//     if (_connectedDevice != null) {
+//       return _buildConnectDeviceView();
+//     }
+//     return _buildListViewOfDevices();
+//   }
+
+//   List<ButtonTheme> _buildReadWriteNotifyButton(
+//       BluetoothCharacteristic characteristic) {
+//     List<ButtonTheme> buttons = new List<ButtonTheme>();
+
+//     if (characteristic.properties.read) {
+//       buttons.add(
+//         ButtonTheme(
+//           minWidth: 10,
+//           height: 20,
+//           child: Padding(
+//             padding: const EdgeInsets.symmetric(horizontal: 4),
+//             child: RaisedButton(
+//               color: Colors.blue,
+//               child: Text('READ', style: TextStyle(color: Colors.white)),
+//               onPressed: () {},
+//             ),
+//           ),
+//         ),
+//       );
+//     }
+//     if (characteristic.properties.write) {
+//       buttons.add(
+//         ButtonTheme(
+//           minWidth: 10,
+//           height: 20,
+//           child: Padding(
+//             padding: const EdgeInsets.symmetric(horizontal: 4),
+//             child: RaisedButton(
+//               child: Text('WRITE', style: TextStyle(color: Colors.white)),
+//               onPressed: () {},
+//             ),
+//           ),
+//         ),
+//       );
+//     }
+//     if (characteristic.properties.notify) {
+//       buttons.add(
+//         ButtonTheme(
+//           minWidth: 10,
+//           height: 20,
+//           child: Padding(
+//             padding: const EdgeInsets.symmetric(horizontal: 4),
+//             child: RaisedButton(
+//               child: Text('NOTIFY', style: TextStyle(color: Colors.white)),
+//               onPressed: () {},
+//             ),
+//           ),
+//         ),
+//       );
+//     }
+
+//     return buttons;
+//   }
+
+//   ListView _buildConnectDeviceView() {
+//     List<Container> containers = new List<Container>();
+
+//     for (BluetoothService service in _services) {
+//       List<Widget> characteristicsWidget = new List<Widget>();
+//       for (BluetoothCharacteristic characteristic in service.characteristics) {
+//         characteristic.value.listen((value) {
+//           print(value);
+//         });
+//         characteristicsWidget.add(
+//           Align(
+//             alignment: Alignment.centerLeft,
+//             child: Column(
+//               children: <Widget>[
+//                 Row(
+//                   children: <Widget>[
+//                     Text(characteristic.uuid.toString(),
+//                         style: TextStyle(fontWeight: FontWeight.bold)),
+//                   ],
+//                 ),
+//                 Row(
+//                   children: <Widget>[
+//                     ..._buildReadWriteNotifyButton(characteristic),
+//                   ],
+//                 ),
+//                 Divider(),
+//               ],
+//             ),
+//           ),
+//         );
+//       }
+//       containers.add(
+//         Container(
+//           child: ExpansionTile(
+//               title: Text(service.uuid.toString()),
+//               children: characteristicsWidget),
+//         ),
+//       );
+//     }
+
+//     return ListView(
+//       padding: const EdgeInsets.all(8),
+//       children: <Widget>[
+//         ...containers,
+//       ],
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) => Scaffold(
+//         appBar: AppBar(
+//           title: Text('Sélectionnez votre vélo'),
+//         ),
+//         body: _buildView(),
+//       );
+// }

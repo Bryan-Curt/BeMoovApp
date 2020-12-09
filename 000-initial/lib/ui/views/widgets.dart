@@ -2,6 +2,8 @@
 // All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
@@ -136,7 +138,7 @@ class ServiceTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('Service'),
-            Text('0x${service.uuid.toString().toUpperCase().substring(4, 8)}',
+            Text(service.uuid.toString(),
                 style: Theme.of(context)
                     .textTheme
                     .body1
@@ -177,7 +179,11 @@ class CharacteristicTile extends StatelessWidget {
       stream: characteristic.value,
       initialData: characteristic.lastValue,
       builder: (c, snapshot) {
+        print(characteristic.value);
         final value = snapshot.data;
+        String receivedStr = ascii.decode(value);
+        print("receivedStr: " + receivedStr);
+        //print(characteristic);
         return ExpansionTile(
           title: ListTile(
             title: Column(
@@ -185,13 +191,12 @@ class CharacteristicTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text('Characteristic'),
-                Text(
-                    '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
+                Text(characteristic.uuid.toString(),
                     style: Theme.of(context).textTheme.body1.copyWith(
                         color: Theme.of(context).textTheme.caption.color))
               ],
             ),
-            subtitle: Text(value.toString()),
+            subtitle: Text('test : ' + receivedStr),
             contentPadding: EdgeInsets.all(0.0),
           ),
           trailing: Row(
