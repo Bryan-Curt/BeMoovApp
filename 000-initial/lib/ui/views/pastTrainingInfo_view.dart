@@ -34,11 +34,12 @@ class _StatefulWidgetDemoState extends State<StatefullWidgetDemo> {
           itemCount: _listFromFile.length,
           itemBuilder: (context, index) {
             return Container(
-                padding: EdgeInsets.symmetric(vertical: screenHeight * .025),
-                child: Text(
-                  _listFromFile[index],
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ));
+              padding: EdgeInsets.symmetric(vertical: screenHeight * .025),
+              child: Text(
+                _listFromFile[index],
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            );
           },
         ),
       ),
