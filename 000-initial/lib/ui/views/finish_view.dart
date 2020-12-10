@@ -4,19 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/user.dart';
-import 'package:provider_architecture/ui/views/simple_view.dart';
-import 'package:provider_architecture/ui/views/sportif_view.dart';
 
 import 'package:responsive_screen/responsive_screen.dart';
 
-import 'finish_view.dart';
-
-class InitPauseView extends StatefulWidget {
+class InitFinishView extends StatefulWidget {
   @override
-  PauseView createState() => PauseView();
+  FinishView createState() => FinishView();
 }
 
-class PauseView extends State<InitPauseView> {
+class FinishView extends State<InitFinishView> {
   String firstDataLabel = "DISTANCE";
   String firstDataValue = "10.3";
   String firstDataUnit = "KM";
@@ -51,25 +47,12 @@ class PauseView extends State<InitPauseView> {
     String secondsStr = donnees[3];
     var temps = hoursStr + ' H ' + minutesStr + ' M ' + secondsStr + ' S';
 
-    Widget bandeauPause = Container(
-      child: Container(
-        color: Colors.red,
-        width: screenWidth,
-        height: screenHeight * 0.08,
-        child: Text(
-          "EN PAUSE",
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white, fontSize: screenHeight * 0.07),
-        ),
-      ),
-    );
-
     Widget title = Container(
       padding: EdgeInsets.only(
           top: screenHeight * 0.08,
           left: screenHeight * 0.03,
           right: screenHeight * 0.03),
-      child: Text('VOS PERFORMANCES EN COURS',
+      child: Text('VOTRE PERFORMANCE DU JOUR',
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: screenHeight * 0.04, fontWeight: FontWeight.bold)),
@@ -195,58 +178,14 @@ class PauseView extends State<InitPauseView> {
           Row(children: [sixthData])
         ]));
 
-    Widget reprendrebutton = Container(
-      width: screenWidth * 0.45,
-      height: screenHeight * 0.09,
-      child: FlatButton(
-        color: Colors.white,
-        onPressed: () async {
-          if (mode == 'simple') {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => InitSimpleMonitoring(),
-                    // Pass the arguments as part of the RouteSettings. The
-                    // DetailScreen reads the arguments from these settings.
-
-                    settings: RouteSettings(arguments: donnees)));
-          } else if (mode == 'sportif') {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => InitSportifMonitoring(),
-                    // Pass the arguments as part of the RouteSettings. The
-                    // DetailScreen reads the arguments from these settings.
-
-                    settings: RouteSettings(arguments: donnees)));
-          }
-        },
-        child: Text(
-          "REPRENDRE",
-          style: TextStyle(color: Colors.green, fontSize: 25),
-        ),
-        shape: RoundedRectangleBorder(
-            side: BorderSide(
-                color: Colors.green, width: 2, style: BorderStyle.solid),
-            borderRadius: BorderRadius.circular(15)),
-      ),
-    );
-
     Widget finbutton = Container(
       width: screenWidth * 0.45,
       height: screenHeight * 0.09,
       margin: EdgeInsets.only(left: screenHeight * 0.03),
       child: FlatButton(
         color: Colors.white,
-        onPressed: () {
-          //fin();
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => InitFinishView(),
-                  // Pass the arguments as part of the RouteSettings. The
-                  // DetailScreen reads the arguments from these settings.
-                  settings: RouteSettings(arguments: donnees)));
+        onPressed: () async {
+          Navigator.pushNamed(context, 'startPage');
         },
         child: Text(
           "ARRÊTER",
@@ -264,7 +203,7 @@ class PauseView extends State<InitPauseView> {
         child: Column(children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [reprendrebutton, finbutton],
+            children: [finbutton],
           )
         ]));
 
@@ -274,7 +213,6 @@ class PauseView extends State<InitPauseView> {
         body: ListView(
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            bandeauPause,
             title,
             datas,
             boutons,

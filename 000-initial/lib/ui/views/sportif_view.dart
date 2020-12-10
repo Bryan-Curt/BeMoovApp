@@ -8,6 +8,8 @@ import 'package:provider_architecture/core/models/user.dart';
 import 'package:responsive_screen/responsive_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider_architecture/ui/views/pause_view.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
 class InitSportifMonitoring extends StatefulWidget {
   @override
@@ -81,6 +83,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
   var donneesPause = List(5);
   int counter;
   bool firstgo = true;
+  bool inPause = false;
 
   String mode = "sportif";
 
@@ -94,6 +97,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         hoursStr = donneesPause[1];
         minutesStr = donneesPause[2];
         secondsStr = donneesPause[3];
+        //inPause = donneesPause[5];
       }
     } else {
       counter = 0;
@@ -161,6 +165,40 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
 
   @override
   Widget build(BuildContext context) {
+    Future<String> getDbPath() async {
+      String pathDb = await getDatabasesPath();
+      return pathDb;
+    }
+
+    var databasesPath = getDbPath();
+    String path = join(databasesPath.toString(), 'data4.db');
+    print(path);
+
+    if (inPause == false) {
+      void createDataBase() async {
+        Database database = await openDatabase(path,
+            version: 1, onCreate: (Database db, int version) async {});
+
+        await database.transaction((txn) async {
+          int t = (int.parse(hoursStr) * 3600).round() +
+              (int.parse(minutesStr) * 60).round() +
+              int.parse(secondsStr);
+          await txn.rawInsert(
+              'INSERT INTO DataMoy(speed,power,heartbeat,cadency, time, idSortie) VALUES (14,110,130,75,' +
+                  t.toString() +
+                  ',(SELECT max(id) FROM DataSortie))');
+          //print('inserted1: $id1');
+        });
+
+        List<Map> list = await database.rawQuery(
+            'SELECT * FROM DataMoy WHERE id=(SELECT max(id) FROM DataMoy)');
+        print(list);
+        //print(inPause);
+      }
+
+      createDataBase();
+    }
+
     var colorAssistance;
     var colorSportifButton;
 
@@ -451,6 +489,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         color: Colors.red,
         onPressed: () {
           pause();
+          inPause = true;
           Navigator.push(
               context,
               MaterialPageRoute(

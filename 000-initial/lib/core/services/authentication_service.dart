@@ -14,7 +14,7 @@ class AuthenticationService {
     var fetchedUser = await _api.getUserProfile(userId);
 
     var hasUser = fetchedUser != null;
-    if(hasUser) {
+    if (hasUser) {
       userController.add(fetchedUser);
     }
 

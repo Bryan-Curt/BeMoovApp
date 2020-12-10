@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider_architecture/ui/views/finish_view.dart';
 import 'package:provider_architecture/ui/views/first_view.dart';
 import 'package:provider_architecture/ui/views/ble_view.dart';
 import 'package:provider_architecture/ui/views/aviitam_view.dart';
@@ -7,6 +8,8 @@ import 'package:provider_architecture/ui/views/simple_view.dart';
 import 'package:provider_architecture/ui/views/start_view.dart';
 import 'package:provider_architecture/ui/views/sportif_view.dart';
 import 'package:provider_architecture/ui/views/pause_view.dart';
+import 'package:provider_architecture/ui/views/bd.dart';
+import 'package:provider_architecture/ui/views/pastTrainingInfo_view.dart';
 
 // Page qui définit dynamiquement toutes les routes, permet de gérer les liens des boutons notemment.
 const String initialRoute = "firstPage";
@@ -28,6 +31,12 @@ class Router {
         return MaterialPageRoute(builder: (_) => InitSportifMonitoring());
       case 'pause':
         return MaterialPageRoute(builder: (_) => InitPauseView());
+      case 'fin':
+        return MaterialPageRoute(builder: (_) => InitFinishView());
+      case 'bd':
+        return MaterialPageRoute(builder: (_) => InitDBView());
+      case 'pastTraining':
+        return MaterialPageRoute(builder: (_) => StatefullWidgetDemo());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
