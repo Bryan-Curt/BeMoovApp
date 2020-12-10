@@ -427,7 +427,6 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
     }
 
     Widget stopwatchsection = Container(
-      //padding: EdgeInsets.only(top: 0, bottom: 0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -492,32 +491,26 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         ]));
 
     Widget tlData = Container(
-        padding: EdgeInsets.only(bottom: screenHeight * 0.016),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(tlDataLabel, style: TextStyle(fontSize: screenHeight * 0.035)),
-            Text(tlDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
-            Text(tlDataUnit, style: TextStyle(fontSize: screenHeight * 0.035)),
-          ],
-        ));
+      children: [
+        Text(tlDataLabel, style: TextStyle(fontSize: screenHeight * 0.035)),
+        Text(tlDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
+        Text(tlDataUnit, style: TextStyle(fontSize: screenHeight * 0.035)),
+      ],
+    ));
 
     Widget trData = Container(
-        padding: EdgeInsets.only(
-            left: screenWidth * 0.20, bottom: screenHeight * 0.016),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(trDataLabel, style: TextStyle(fontSize: screenHeight * 0.035)),
-            Text(trDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
-            Text(trDataUnit, style: TextStyle(fontSize: screenHeight * 0.035)),
-          ],
-        ));
+      children: [
+        Text(trDataLabel, style: TextStyle(fontSize: screenHeight * 0.035)),
+        Text(trDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
+        Text(trDataUnit, style: TextStyle(fontSize: screenHeight * 0.035)),
+      ],
+    ));
 
     Widget blData = Container(
-        padding: EdgeInsets.only(left: screenWidth * 0.14),
+        padding: EdgeInsets.only(top: screenWidth * 0.05),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(blDataLabel, style: TextStyle(fontSize: screenHeight * 0.035)),
             Text(blDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
@@ -526,9 +519,8 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         ));
 
     Widget brData = Container(
-        padding: EdgeInsets.only(left: screenWidth * 0.18),
+        padding: EdgeInsets.only(top: screenWidth * 0.05),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(brDataLabel, style: TextStyle(fontSize: screenHeight * 0.035)),
             Text(brDataValue, style: TextStyle(fontSize: screenHeight * 0.06)),
@@ -540,12 +532,17 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
         padding: EdgeInsets.only(top: screenHeight * 0.01),
         child: Column(children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [tlData, trData],
+            children: <Widget>[
+              Expanded(child: tlData),
+              Expanded(child: trData),
+            ],
           ),
           Row(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              children: [blData, brData])
+            children: <Widget>[
+              Expanded(child: blData),
+              Expanded(child: brData),
+            ],
+          )
         ]));
 
     Widget tiroir = Container(
