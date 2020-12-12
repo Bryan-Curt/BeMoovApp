@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:provider_architecture/ui/views/finish_view.dart';
 import 'package:provider_architecture/ui/views/first_view.dart';
 import 'package:provider_architecture/ui/views/ble_view.dart';
@@ -20,13 +21,17 @@ class Router {
       case 'firstPage':
         return MaterialPageRoute(builder: (_) => FirstView());
       case 'bleConnexionPage':
-        return MaterialPageRoute(builder: (_) => BleConnexion());
+        return MaterialPageRoute(builder: (_) => FlutterBlueApp());
       case 'aviitamConnexionPage':
         return MaterialPageRoute(builder: (_) => AviitamConnexion());
       case 'startPage':
         return MaterialPageRoute(builder: (_) => InitStartView());
       case 'simple':
         return MaterialPageRoute(builder: (_) => InitSimpleMonitoring());
+      /*case 'simple':
+        BluetoothDevice d = settings.arguments;
+        return MaterialPageRoute(
+            builder: (_) => InitSimpleMonitoring(device: d));*/
       case 'sportif':
         return MaterialPageRoute(builder: (_) => InitSportifMonitoring());
       case 'pause':

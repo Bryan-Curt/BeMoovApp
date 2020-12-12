@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_architecture/core/models/appMode.dart';
 import 'package:provider_architecture/core/models/user.dart';
@@ -8,6 +9,10 @@ import 'package:provider_architecture/ui/views/pause_view.dart';
 import 'package:responsive_screen/responsive_screen.dart';
 
 class InitSimpleMonitoring extends StatefulWidget {
+  final BluetoothDevice device;
+  //@required this.device
+  InitSimpleMonitoring({@required this.device});
+
   @override
   SimpleMonitoring createState() => SimpleMonitoring();
 }
@@ -34,7 +39,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   String mode = "simple";
 
   var donnees = List(5);
-  var donneesPause = List(5);
+  var donneesPause = List(6);
 
   int counter;
   bool firstgo = true;
@@ -50,6 +55,8 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
         hoursStr = donneesPause[1];
         minutesStr = donneesPause[2];
         secondsStr = donneesPause[3];
+        print("DONNEES PAUSE: ----- : " + donneesPause.toString());
+        //device = donneesPause[5];
       }
     } else {
       counter = 0;
@@ -93,9 +100,25 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
 
   void initStopWatch() {
     firstgo = false;
+    //device.connect();
+    //print(widget.device);
     timerStream = stopWatchStream();
     mode = "simple";
+    /*var deviceConnection = flutterBlue.connect(widget.device).listen((s) {
+      if (s == BluetoothDeviceState.connected) {
+        // device is connected, do something
+      }
+    });*/
+    //widget.device.connect();
+
     timerSubscription = timerStream.listen((int newTick) {
+      print("c'est lui en bas : ");
+      print(widget.device);
+      widget.device.services.forEach((element) {
+        element.forEach((element2) {
+          print("SERVICE: " + element2.toString());
+        });
+      });
       if (mounted)
         setState(() {
           hoursStr =
