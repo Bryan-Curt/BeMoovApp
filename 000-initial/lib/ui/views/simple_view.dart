@@ -22,12 +22,12 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   String secondsStr;
 
   String leftDataLabel = "BPM";
-  String leftDataValue = "175";
+  String leftDataValue = "125";
   String leftDataUnit = "BPM";
   String leftDataImg = "pulse.png";
 
   String rightDataLabel = "Vitesse";
-  String rightDataValue = "175";
+  String rightDataValue = "22";
   String rightDataUnit = "KM/H";
   String rightDataImg = "pulse.png";
 

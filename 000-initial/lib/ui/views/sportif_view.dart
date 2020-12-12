@@ -214,7 +214,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
       case "BPM":
         {
           mainDataLabel = "Fréquence Cardiaque";
-          mainDataValue = "175";
+          mainDataValue = "128";
           mainDataUnit = "BPM";
           mainDataImg = "pulse.png";
         }
@@ -230,7 +230,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
       case "KM":
         {
           mainDataLabel = "Distance";
-          mainDataValue = "4.07";
+          mainDataValue = "1.01";
           mainDataUnit = "KM";
           mainDataImg = "distance.png";
         }
@@ -278,7 +278,7 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
       case "KM":
         {
           tlDataLabel = "Distance";
-          tlDataValue = "4.07";
+          tlDataValue = "1.07";
           tlDataUnit = "KM";
         }
         break;
