@@ -86,13 +86,14 @@ class FindDevicesScreen extends StatelessWidget {
                       .map(
                         (r) => ScanResultTile(
                             result: r,
-                            onTap: () {
+                            onTap: () async {
                               if (r.device.state.toString() ==
                                   BluetoothDeviceState.disconnected
                                       .toString()) {
                                 r.device.connect();
                               }
                               //r.device.connect();
+
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

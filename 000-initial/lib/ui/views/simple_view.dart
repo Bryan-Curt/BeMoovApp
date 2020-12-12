@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -112,13 +113,10 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
     //widget.device.connect();
 
     timerSubscription = timerStream.listen((int newTick) {
-      print("c'est lui en bas : ");
-      print(widget.device);
-      widget.device.services.forEach((element) {
-        element.forEach((element2) {
-          print("SERVICE: " + element2.toString());
-        });
-      });
+      //print("c'est lui en bas : ");
+      //print(widget.device);
+      //print("wwwwwwwwwwwww" + widget.device.services.length.toString());
+      getData2(widget.device);
       if (mounted)
         setState(() {
           hoursStr =
@@ -266,5 +264,71 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
         bottomNavigationBar: pausebutton,
       ),
     );
+  }
+}
+
+Future<String> getData(BluetoothDevice device) async {
+  var value;
+  device.discoverServices().toString();
+  device.services.forEach((element) {
+    element.forEach((element2) async {
+      if (element2.uuid.toString().toUpperCase() ==
+          "6E400001-B5A3-F393-E0A9-E50E24DCCA9E") {
+        for (final element3 in element2.characteristics) {
+          element3.read();
+          value = element3.value;
+        }
+
+        //print(ascii.decode(element3.read()));
+      }
+    });
+  });
+
+  return value;
+}
+
+void getData2(BluetoothDevice device) async {
+  device.discoverServices();
+  device.services.forEach((services) async {
+    for (BluetoothService service in services) {
+      print("service id is : ${service.uuid}");
+      if (service.uuid.toString().toUpperCase() ==
+          "6E400001-B5A3-F393-E0A9-E50E24DCCA9E") {
+        var characteristics = service.characteristics;
+        for (BluetoothCharacteristic c in characteristics) {
+          print("### ${c.uuid}");
+          String c_id = c.uuid.toString();
+          if (c_id.toUpperCase() == "6E400003-B5A3-F393-E0A9-E50E24DCCA9E" ||
+              c_id.toUpperCase() == "6E400002-B5A3-F393-E0A9-E50E24DCCA9E") {
+            //await c.setNotifyValue(true);
+            c.value.listen((value) {
+              _readInfoFromDevice(value);
+            });
+/*
+            @override
+            Widget build(BuildContext context) {
+              return StreamBuilder<List<int>>(
+                  stream: c.value,
+                  initialData: c.lastValue,
+                  // ignore: missing_return
+                  builder: (c, snapshot) {
+                    //print(c.value);
+                    final value = snapshot.data;
+                    String receivedStr = ascii.decode(value);
+                    print("receivedStr: " + receivedStr);
+                  });
+            }
+          */
+          }
+        }
+      }
+    }
+  });
+}
+
+_readInfoFromDevice(List values) async {
+  print("AH");
+  if (values.length > 0) {
+    print("value: ${values}");
   }
 }
