@@ -23,6 +23,8 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
   Stream<int> timerStream;
   StreamSubscription<int> timerSubscription;
 
+  BluetoothCharacteristic _characteristic;
+
   String hoursStr;
   String minutesStr;
   String secondsStr;
@@ -87,6 +89,10 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
 
     void startTimer() {
       timer = Timer.periodic(timerInterval, tick);
+      getCharacteristic(widget.device).then((val) => setState(() {
+            _characteristic = val;
+          }));
+      _characteristic.read();
     }
 
     streamController = StreamController<int>(
@@ -99,12 +105,13 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
     return streamController.stream;
   }
 
-  void initStopWatch() {
+  void initStopWatch() async {
     firstgo = false;
     //device.connect();
     //print(widget.device);
     timerStream = stopWatchStream();
     mode = "simple";
+
     /*var deviceConnection = flutterBlue.connect(widget.device).listen((s) {
       if (s == BluetoothDeviceState.connected) {
         // device is connected, do something
@@ -116,9 +123,12 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
       //print("c'est lui en bas : ");
       //print(widget.device);
       //print("wwwwwwwwwwwww" + widget.device.services.length.toString());
-      getData2(widget.device);
+      //getData2(widget.device);
       if (mounted)
         setState(() {
+          getCharacteristic(widget.device).then((val) => setState(() {
+                _characteristic = val;
+              }));
           hoursStr =
               ((newTick / (60 * 60)) % 60).floor().toString().padLeft(2, '0');
           minutesStr = ((newTick / 60) % 60).floor().toString().padLeft(2, '0');
@@ -249,7 +259,7 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
       ),
     );
 
-    return Provider<MyMode>(
+    /* return Provider<MyMode>(
       create: (context) => MyMode(),
       child: Scaffold(
         body: ListView(
@@ -263,28 +273,33 @@ class SimpleMonitoring extends State<InitSimpleMonitoring> {
         ),
         bottomNavigationBar: pausebutton,
       ),
-    );
+    ); */
+
+    return StreamBuilder<List<int>>(
+        stream: _characteristic.value,
+        initialData: _characteristic.lastValue,
+        builder: (c, snapshot) {
+          print(_characteristic.descriptors);
+          final value = snapshot.data;
+          String receivedStr = ascii.decode(value);
+          print("receivedStr2: " + receivedStr);
+          return Provider<MyMode>(
+            create: (context) => MyMode(),
+            child: Scaffold(
+              body: ListView(
+                padding: EdgeInsets.symmetric(vertical: screenHeight * 0.022),
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  stopwatchsection,
+                  circularprogressbarsection,
+                  secondaryData
+                ],
+              ),
+              bottomNavigationBar: pausebutton,
+            ),
+          );
+        });
   }
-}
-
-Future<String> getData(BluetoothDevice device) async {
-  var value;
-  device.discoverServices().toString();
-  device.services.forEach((element) {
-    element.forEach((element2) async {
-      if (element2.uuid.toString().toUpperCase() ==
-          "6E400001-B5A3-F393-E0A9-E50E24DCCA9E") {
-        for (final element3 in element2.characteristics) {
-          element3.read();
-          value = element3.value;
-        }
-
-        //print(ascii.decode(element3.read()));
-      }
-    });
-  });
-
-  return value;
 }
 
 void getData2(BluetoothDevice device) async {
@@ -331,4 +346,35 @@ _readInfoFromDevice(List values) async {
   if (values.length > 0) {
     print("value: ${values}");
   }
+}
+
+Future<BluetoothCharacteristic> getCharacteristic(
+    BluetoothDevice device) async {
+  List<BluetoothService> services;
+  BluetoothService myImportantService;
+  List<BluetoothCharacteristic> characteristics;
+  BluetoothCharacteristic myImportantCharacteristic;
+
+  //Get your services from your device.
+  //device.connect();
+  services = await device.discoverServices();
+
+  //Find the service we are looking for.
+  for (BluetoothService s in services) {
+    //Would recommend to convert all to lowercase if comparing.
+    if (s.uuid.toString().toUpperCase() ==
+        "6E400001-B5A3-F393-E0A9-E50E24DCCA9E") myImportantService = s;
+  }
+
+  //Get this services characteristics.
+  characteristics = myImportantService.characteristics;
+
+  //Find the characteristic we are looking for.
+  for (BluetoothCharacteristic c in characteristics) {
+    //Would recommend to convert all to lowercase if comparing.
+    if (c.uuid.toString().toUpperCase() ==
+        "6E400002-B5A3-F393-E0A9-E50E24DCCA9E") myImportantCharacteristic = c;
+  }
+
+  return myImportantCharacteristic;
 }
