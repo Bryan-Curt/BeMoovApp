@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fbd22465-0d57-4d17-b33e-16439222fa63" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/000-initial/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/000-initial/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/000-initial/lib/ui/views/finish_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/000-initial/lib/ui/views/finish_view.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1neps2bGEy0ZuPDNbww2GmtUeeN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fbd22465-0d57-4d17-b33e-16439222fa63" name="Default Changelist" comment="" />
+      <created>1611760613955</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611760613955</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="100" y="123" width="1080" height="510" key="AVDManager" timestamp="1611760923723">
+      <screen x="0" y="23" width="1280" height="710" />
+    </state>
+    <state x="100" y="123" width="1080" height="510" key="AVDManager/0.23.1280.710@0.23.1280.710" timestamp="1611760923723" />
+    <state x="435" y="131" key="AndroidProcessChooserDialog" timestamp="1611760645359">
+      <screen x="0" y="23" width="1280" height="710" />
+    </state>
+    <state x="435" y="131" key="AndroidProcessChooserDialog/0.23.1280.710@0.23.1280.710" timestamp="1611760645359" />
+    <state x="141" y="23" width="997" height="710" key="SettingsEditor" timestamp="1611762124285">
+      <screen x="0" y="23" width="1280" height="710" />
+    </state>
+    <state x="141" y="23" width="997" height="710" key="SettingsEditor/0.23.1280.710@0.23.1280.710" timestamp="1611762124285" />
+  </component>
+</project>

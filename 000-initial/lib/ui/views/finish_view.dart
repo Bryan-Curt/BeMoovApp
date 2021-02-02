@@ -49,7 +49,7 @@ class FinishView extends State<InitFinishView> {
 
     Widget title = Container(
       padding: EdgeInsets.only(
-          top: screenHeight * 0.08,
+          top: screenHeight * 0.01,
           left: screenHeight * 0.03,
           right: screenHeight * 0.03),
       child: Text('VOTRE PERFORMANCE DU JOUR',
@@ -58,7 +58,16 @@ class FinishView extends State<InitFinishView> {
               fontSize: screenHeight * 0.04, fontWeight: FontWeight.bold)),
     );
 
+    Widget imagesection = Container(
+      padding: EdgeInsets.only(top: screenHeight * 0.06),
+      child: Image.asset(
+        'images/trophy.png',
+        height: screenHeight * .1882,
+      ),
+    );
+
     Widget firstData = Container(
+        //padding: EdgeInsets.only(top: screenHeight * 0.002),
         child: Row(
       children: [
         Text(firstDataLabel,
@@ -179,17 +188,22 @@ class FinishView extends State<InitFinishView> {
         ]));
 
     Widget finbutton = Container(
-      width: screenWidth * 0.45,
-      height: screenHeight * 0.09,
-      margin: EdgeInsets.only(left: screenHeight * 0.03),
+      padding: EdgeInsets.symmetric(
+          horizontal: screenWidth * 0.2170, vertical: screenHeight * 0.056),
       child: FlatButton(
         color: Colors.white,
         onPressed: () async {
           Navigator.pushNamed(context, 'startPage');
         },
-        child: Text(
-          "ARRÊTER",
-          style: TextStyle(color: Colors.red, fontSize: 25),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: screenHeight * .01),
+          child: Text(
+            '''SAUVEGARDER ET 
+REVENIR À 
+L'ACCEUIL''',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.red, fontSize: 15),
+          ),
         ),
         shape: RoundedRectangleBorder(
             side: BorderSide(
@@ -198,15 +212,6 @@ class FinishView extends State<InitFinishView> {
       ),
     );
 
-    Widget boutons = Container(
-        padding: EdgeInsets.only(top: screenHeight * 0.1),
-        child: Column(children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [finbutton],
-          )
-        ]));
-
     return Provider<MyMode>(
       create: (context) => MyMode(),
       child: Scaffold(
@@ -214,10 +219,11 @@ class FinishView extends State<InitFinishView> {
           physics: const NeverScrollableScrollPhysics(),
           children: [
             title,
+            imagesection,
             datas,
-            boutons,
           ],
         ),
+        bottomNavigationBar: finbutton,
       ),
     );
   }

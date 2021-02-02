@@ -609,10 +609,11 @@ class SportifMonitoring extends State<InitSportifMonitoring> {
                   shape: CircleBorder(),
                 )),
             Container(
-                width: screenWidth * .5,
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 50),
+                width: screenWidth * .4,
+                padding: EdgeInsets.symmetric(vertical: screenHeight * .05),
                 child: Text(
-                  'DONNÉE PRINCIPALE',
+                  '''DONNÉE
+PRINCIPALE''',
                   style: TextStyle(fontSize: 30),
                   textAlign: TextAlign.center,
                 )),

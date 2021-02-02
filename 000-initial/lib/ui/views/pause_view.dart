@@ -223,7 +223,7 @@ class PauseView extends State<InitPauseView> {
         },
         child: Text(
           "REPRENDRE",
-          style: TextStyle(color: Colors.green, fontSize: 25),
+          style: TextStyle(color: Colors.green, fontSize: screenWidth * 0.052),
         ),
         shape: RoundedRectangleBorder(
             side: BorderSide(
@@ -250,7 +250,7 @@ class PauseView extends State<InitPauseView> {
         },
         child: Text(
           "ARRÊTER",
-          style: TextStyle(color: Colors.red, fontSize: 25),
+          style: TextStyle(color: Colors.red, fontSize: screenWidth * 0.052),
         ),
         shape: RoundedRectangleBorder(
             side: BorderSide(
